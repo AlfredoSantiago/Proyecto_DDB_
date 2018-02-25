@@ -11,7 +11,7 @@ public class cancion_listaDAO {
     
     public void agregarCancionEnLista(ListaEntity c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into cancion_lista values(?,?,?,?,?,?)";
+        String query = "insert into cancion_lista values(?,?)";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();

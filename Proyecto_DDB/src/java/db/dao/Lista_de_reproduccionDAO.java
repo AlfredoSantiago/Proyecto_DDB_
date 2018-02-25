@@ -11,7 +11,7 @@ public class Lista_de_reproduccionDAO {
     
     public void agregarListaDeReprodccion(Lista c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into lista_de_reproducion values(?,?,?,?,?,?)";
+        String query = "insert into lista_de_reproduccion values(?,?,?)";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
