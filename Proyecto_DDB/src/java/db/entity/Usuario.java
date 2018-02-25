@@ -1,5 +1,5 @@
 package db.entity;
-
+//usuario
 public class Usuario {
     private int idUsuario;
     private String nombre;
