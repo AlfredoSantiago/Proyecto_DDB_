@@ -7,9 +7,9 @@ public class CancionEntity {
     private String album;
     private  String genero;
     private  String artista;
-    private String anio;
+    private int anio;
 
-    public CancionEntity(int idCancion, String nombre, String album, String genero, String artista, String anio) {
+    public CancionEntity(int idCancion, String nombre, String album, String genero, String artista, int anio) {
         this.idCancion = idCancion;
         this.nombre = nombre;
         this.album = album;
@@ -18,7 +18,7 @@ public class CancionEntity {
         this.anio = anio;
     }
     public CancionEntity(){
-        this(0,null,null,null,null,null);
+        this(0,null,null,null,null,0);
     }
     public String toString(){
         return "id: "+idCancion+"\nNombre: "+nombre+"\nAlbum: "+album+"\nGenero: "+genero+"\nArtista: "+artista+"\nAño: "+anio;
@@ -64,11 +64,11 @@ public class CancionEntity {
         this.artista = artista;
     }
 
-    public String getAnio() {
+    public int getAnio() {
         return anio;
     }
 
-    public void setAnio(String anio) {
+    public void setAnio(int anio) {
         this.anio = anio;
     }    
 }

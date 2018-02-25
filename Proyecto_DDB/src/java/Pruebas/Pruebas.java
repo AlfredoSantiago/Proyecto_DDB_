@@ -7,8 +7,12 @@ import java.sql.SQLException;
 
 public class Pruebas {
     public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        CancionEntity c = new CancionEntity(1,"prueba", "prueba", "prueba", "prueba", "prueba");
+        CancionEntity c = new CancionEntity(1,"prueba2", "prueba2", "prueba2", "prueb2a", 2018);
         CancionDAO cDAO = new CancionDAO();
-        cDAO.agregarCancion(c);
+        cDAO.actualizarCancion(c);
+        //cDAO.agregarCancion(c);
+        //CancionEntity c = cDAO.buscarCancion(1);
+        //System.out.println(c);
+        //cDAO.eliminarCancion(1);
     }
 }
