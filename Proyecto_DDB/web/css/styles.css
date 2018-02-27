@@ -139,4 +139,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a552d', end
     color:#1ED760;
 }
 .tranaparente{
-	background-color: transparent;}
+	background-color: transparent;
+}
+.ancho_login{
+	width: 700px;
+}
+.anchi-imagen{
+	width: 200px;
+	padding: 20px;
+}
