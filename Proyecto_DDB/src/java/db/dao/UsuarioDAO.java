@@ -1,10 +1,11 @@
 package db.dao;
-//cancion
 import db.connection.Conexion;
 import java.sql.SQLException;
 import db.entity.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 public class UsuarioDAO {
     
     public UsuarioDAO(){}
@@ -78,4 +79,27 @@ public class UsuarioDAO {
         pS.execute();
         conector.getConect().commit();
     }
+    
+    public List<Usuario> getUsuarios() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Conexion conector = new Conexion();
+        String query = "SELECT * FROM Usuario ORDER BY nombre";
+        PreparedStatement pS;
+        ResultSet rS;
+
+        conector.setBd("proyecto_DDB");
+        conector.abrirConexion();
+
+        pS = conector.getConect().prepareStatement(query);
+        conector.getConect().setAutoCommit(false);
+
+        rS = pS.executeQuery();
+        conector.getConect().commit();
+
+        List<Usuario> lista = new ArrayList<>();
+        while (rS.next()) {
+            lista.add(new Usuario(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5),rS.getString(6), rS.getInt(7)));
+        }
+        return lista;
+    }
 }
+

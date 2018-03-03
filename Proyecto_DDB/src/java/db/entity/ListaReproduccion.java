@@ -1,23 +1,18 @@
-//lista_reproduccion
 package db.entity;
 
-public class Lista {
+public class ListaReproduccion {
     private int idLista;
     private String nombre;
     private int idUsuario;
 
-    public Lista(int idLista, String nombre, int idUsuario) {
+    public ListaReproduccion(int idLista, String nombre, int idUsuario) {
         this.idLista = idLista;
         this.nombre = nombre;
         this.idUsuario = idUsuario;
     }
     
-    public Lista(){
-        this(0,null,0);
-    }
-    
-    public String toString(){
-        return "idLista: "+idLista;
+    public ListaReproduccion(){
+        this(0, null, 0);
     }
 
     public int getIdLista() {
@@ -43,4 +38,9 @@ public class Lista {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+    
+    public String toString(){
+        return "idLista: "+idLista+" nombre: "+nombre+" idUsuario: "+idUsuario;
+    }
+    
 }

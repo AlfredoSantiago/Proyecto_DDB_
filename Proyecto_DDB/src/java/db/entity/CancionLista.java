@@ -1,16 +1,16 @@
 //cancion_lista
 package db.entity;
 
-public class ListaEntity {
+public class CancionLista {
     private int idLista;
     private int idCancion;
 
-    public ListaEntity(int idLista, int idCancion) {
+    public CancionLista(int idLista, int idCancion) {
         this.idLista = idLista;
         this.idCancion = idCancion;
     }
     
-    public ListaEntity(){
+    public CancionLista(){
         this(0,0);
     }
     
@@ -32,7 +32,5 @@ public class ListaEntity {
 
     public void setIdCancion(int idCancion) {
         this.idCancion = idCancion;
-    }
-    
-    
+    }    
 }

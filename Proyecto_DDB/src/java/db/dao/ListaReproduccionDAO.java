@@ -1,38 +1,36 @@
 package db.dao;
-//cancion
+//lista_reproduccion
 import db.connection.Conexion;
-import db.entity.Artista;
 import java.sql.SQLException;
-import db.entity.Cancion;
+import db.entity.ListaReproduccion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-public class CancionDAO {
+public class ListaReproduccionDAO {
     
-    public CancionDAO(){}
+    public ListaReproduccionDAO(){}
     
-    public void agregarCancion(Cancion c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void agregarListaDeReprodccion(ListaReproduccion c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into Cancion values(?,?,?,?,?)";
+        String query = "insert into lista_de_reproduccion values(?,?,?)";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
-        pS.setInt(1, c.getIdCancion());
+        pS.setInt(1, c.getIdLista());
         pS.setString(2, c.getNombre());
-        pS.setString(3, c.getAlbum());
-        pS.setString(4, c.getGenero());
-        pS.setInt(5, c.getAnio());
+        pS.setInt(3, c.getIdUsuario());
+       
         pS.execute();
         conector.getConect().commit();
         conector.cerrarConexion();
     }
     
-    public Cancion buscarCancion(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public ListaReproduccion buscarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from Cancion where idCancion = ?";
+        String query = "select * from lista_de_reproducion where idLista = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -43,13 +41,13 @@ public class CancionDAO {
         rS = pS.executeQuery();
         conector.getConect().commit();
         return rS.next()
-                ? new Cancion(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getInt(5))
+                ? new ListaReproduccion(rS.getInt(1), rS.getString(2), rS.getInt(3))
                 : null;
     }
     
-    public void eliminarCancion(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void eliminarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "delete from Cancion where idCancion=?";
+        String query = "delete from lista_de_reproducion where idLista=?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -61,26 +59,23 @@ public class CancionDAO {
         conector.cerrarConexion();
     }
     
-    public void actualizarCancion(Cancion c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void actualizarLista(ListaReproduccion c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector = new Conexion();
-        String query = "UPDATE Cancion SET nombre = ?, album = ?, genero = ?, anio=?   WHERE idcancion = ?";
+        String query = "UPDATE lista_de_reproducion SET Nombre = ? where idLista = ?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
         pS.setString(1, c.getNombre());
-        pS.setString(2, c.getAlbum());
-        pS.setString(3, c.getGenero());
-        pS.setInt(4, c.getAnio());
-        pS.setInt(5, c.getIdCancion());
+        pS.setInt(2, c.getIdLista());
         pS.execute();
         conector.getConect().commit();
     }
     
-    public List<Cancion> getCanciones() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public List<ListaReproduccion> getListasReproduccion() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM cancion ORDER BY idCancion";
+        String query = "SELECT * FROM Lista_de_Reproduccion ORDER BY idLista";
         PreparedStatement pS;
         ResultSet rS;
 
@@ -93,9 +88,9 @@ public class CancionDAO {
         rS = pS.executeQuery();
         conector.getConect().commit();
 
-        List<Cancion> lista = new ArrayList<>();
+        List<ListaReproduccion> lista = new ArrayList<>();
         while (rS.next()) {
-            lista.add(new Cancion(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getInt(5)));
+            lista.add(new ListaReproduccion(rS.getInt(1), rS.getString(2), rS.getInt(3)));
         }
         return lista;
     }

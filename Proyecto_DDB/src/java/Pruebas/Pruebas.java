@@ -1,29 +1,56 @@
 
 package Pruebas;
 
+import db.dao.ArtistaDAO;
 import db.dao.CancionDAO;
-import db.dao.Lista_de_reproduccionDAO;
 import db.dao.UsuarioDAO;
-import db.dao.cancion_listaDAO;
-import db.entity.CancionEntity;
-import db.entity.Lista;
-import db.entity.ListaEntity;
+import db.dao.AdministradorDAO;
+import db.dao.CancionArtistaDAO;
+import db.dao.CancionListaDAO;
+import db.dao.DatosPagoDAO;
+import db.dao.ListaReproduccionDAO;
+import db.entity.Administrador;
+import db.entity.Artista;
+import db.entity.Cancion;
+import db.entity.CancionArtista;
+import db.entity.CancionLista;
+import db.entity.DatosPago;
+import db.entity.ListaReproduccion;
 import db.entity.Usuario;
 import java.sql.SQLException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Pruebas {
-    public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        //CancionEntity c = new CancionEntity(1,"prueba2", "prueba2", "prueba2", "prueb2a", 2018);
-        //Usuario u =  new Usuario(1,"Jonathan", "Aviles", "Gomez","Admin","contra",1);
-        //Lista l = new Lista(1, "Lo mas chingon", 1);
-        //Lista_de_reproduccionDAO lDAO = new Lista_de_reproduccionDAO();
-        //lDAO.agregarListaDeReprodccion(l);
-        //CancionDAO cDAO = new CancionDAO();
-        //UsuarioDAO uDAO = new UsuarioDAO();
-        ListaEntity l = new ListaEntity(1,1);
-        cancion_listaDAO lcDAO = new cancion_listaDAO();
-        lcDAO.agregarCancionEnLista(l);
-//uDAO.agregarUsuario(u);
-      
+    public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException{
+        /*Usuario u = new Usuario(1, "ALfredo", "Santiago", "Hernandez", "Alfredo", "pass", 2);
+        UsuarioDAO uDAO = new UsuarioDAO();
+        uDAO.agregarUsuario(u);
+        Cancion c = new Cancion(1,"yo si", "no lo se", "reguaetoonn", 1900);
+        CancionDAO cDAO = new CancionDAO();
+        cDAO.agregarCancion(c);
+        Artista a = new Artista(1, "Alfredo", "Santiago", "Hernandez","Es la pura verga este wey");
+        ArtistaDAO aDAO = new ArtistaDAO();
+        aDAO.agregarArtista(a);
+        /*Administrador a = new Administrador(1,"CZER#", 1);
+        AdministradorDAO aDAO = new AdministradorDAO();
+        aDAO.agregarAdministrador(a);
+        
+        DatosPago dp= new DatosPago(2, "Alfredo", "Santiago", "Hernandez", "5555222444326676", "2017-03-12", 1);
+        DatosPagoDAO dpDAO = new DatosPagoDAO();
+        dpDAO.agregarDatosPago(dp);
+        CancionArtista ca = new CancionArtista(1,1);
+        CancionArtistaDAO caDAO = new CancionArtistaDAO();
+        caDAO.agregarCancionArtista(ca);*/
+        /*ListaReproduccion lr = new ListaReproduccion(1,"Gustosculposos", 1);
+        ListaReproduccionDAO lrDAO = new ListaReproduccionDAO();
+        lrDAO.agregarListaDeReprodccion(lr);
+        CancionLista cl = new CancionLista(1,1);
+        CancionListaDAO clDAO = new CancionListaDAO();
+        clDAO.agregarCancionEnLista(cl);*/
+        //System.out.println(d.getYear()+1900+" "+d.getDate()+" "+(d.getMonth()+1));
     }
+    
+
 }

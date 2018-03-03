@@ -1,27 +1,25 @@
 //cancion
 package db.entity;
 
-public class CancionEntity {
+public class Cancion {
     private int idCancion;
     private String nombre;
     private String album;
     private  String genero;
-    private  String artista;
     private int anio;
 
-    public CancionEntity(int idCancion, String nombre, String album, String genero, String artista, int anio) {
+    public Cancion(int idCancion, String nombre, String album, String genero, int anio) {
         this.idCancion = idCancion;
         this.nombre = nombre;
         this.album = album;
         this.genero = genero;
-        this.artista = artista;
         this.anio = anio;
     }
-    public CancionEntity(){
-        this(0,null,null,null,null,0);
+    public Cancion(){
+        this(0,null,null,null,0);
     }
     public String toString(){
-        return "id: "+idCancion+"\nNombre: "+nombre+"\nAlbum: "+album+"\nGenero: "+genero+"\nArtista: "+artista+"\nAño: "+anio;
+        return "id: "+idCancion+"\nNombre: "+nombre+"\nAlbum: "+album+"\nGenero: "+genero+"\nAño: "+anio;
     }
 
     public int getIdCancion() {
@@ -54,14 +52,6 @@ public class CancionEntity {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public String getArtista() {
-        return artista;
-    }
-
-    public void setArtista(String artista) {
-        this.artista = artista;
     }
 
     public int getAnio() {
