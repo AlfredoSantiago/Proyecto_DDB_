@@ -129,6 +129,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a552d', end
 .top-100{
 	margin-top: 300px
 }
+.top-1000{
+	margin-top: 100px
+}
 #playlist{
 	list-style: none;
 }
@@ -190,4 +193,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a552d', end
 }
 .grande-10{
 	font-size: 25px;
+}
+.tam{
+	width: 100%;
+}
+.prueba{
+	background-color: red;
 }
