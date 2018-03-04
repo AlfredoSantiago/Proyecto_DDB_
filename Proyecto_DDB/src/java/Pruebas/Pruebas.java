@@ -24,10 +24,8 @@ import java.text.SimpleDateFormat;
 
 public class Pruebas {
     public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException{
-        /*Usuario u = new Usuario(1, "ALfredo", "Santiago", "Hernandez", "Alfredo", "pass", 2);
-        UsuarioDAO uDAO = new UsuarioDAO();
-        uDAO.agregarUsuario(u);
-        Cancion c = new Cancion(1,"yo si", "no lo se", "reguaetoonn", 1900);
+        Usuario u = new Usuario(1, "ALfredo", "Santiago", "Hernandez", "Alfredo", "pass", 2,"alfa");
+        /*Cancion c = new Cancion(1,"yo si", "no lo se", "reguaetoonn", 1900);
         CancionDAO cDAO = new CancionDAO();
         cDAO.agregarCancion(c);
         Artista a = new Artista(1, "Alfredo", "Santiago", "Hernandez","Es la pura verga este wey");
@@ -50,6 +48,14 @@ public class Pruebas {
         CancionListaDAO clDAO = new CancionListaDAO();
         clDAO.agregarCancionEnLista(cl);*/
         //System.out.println(d.getYear()+1900+" "+d.getDate()+" "+(d.getMonth()+1));
+        UsuarioDAO uDAO = new UsuarioDAO();
+        uDAO.agregarUsuario(u);
+        //uDAO.eliminarUsuario(1);
+        System.out.println("<li class=\"list-group-item tranaparente \">\n" +
+"                                    <a href=\"src/2.mp3\"><span class=\"text-color-gris\">NOMBRE CANCION.</span></a>\n" +
+"                                    <button type=\"button\" class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n" +
+"                                </li>");
+        
     }
     
 

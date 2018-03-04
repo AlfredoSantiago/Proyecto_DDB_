@@ -45,6 +45,23 @@ public class AdministradorDAO {
                 : null;
     }
     
+    public Administrador buscarAdministradorDeUsuario(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        Conexion conector  = new Conexion();
+        String query = "select * from Administrador where idUsuario = ?";
+        PreparedStatement pS;
+        ResultSet rS;
+        conector.setBd("proyecto_DDB");
+        conector.abrirConexion();
+        pS = conector.getConect().prepareStatement(query);
+        conector.getConect().setAutoCommit(false);
+        pS.setInt(1, id);
+        rS = pS.executeQuery();
+        conector.getConect().commit();
+        return rS.next()
+                ? new Administrador(rS.getInt(1), rS.getString(2), rS.getInt(3))
+                : null;
+    }
+    
     public void eliminarAdministrador(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
         String query = "delete from Administrador where idUsuario=?";

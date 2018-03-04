@@ -12,7 +12,7 @@ public class UsuarioDAO {
     
     public void agregarUsuario(Usuario c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into usuario values(?,?,?,?,?,?,?)";
+        String query = "insert into usuario values(?,?,?,?,?,?,?,?)";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -25,6 +25,7 @@ public class UsuarioDAO {
         pS.setString(5, c.getUsuario());
         pS.setString(6, c.getContrasenia());
         pS.setInt(7, c.getTipo());
+        pS.setString(8, c.getEmail());
         pS.execute();
         conector.getConect().commit();
         conector.cerrarConexion();
@@ -43,7 +44,7 @@ public class UsuarioDAO {
         rS = pS.executeQuery();
         conector.getConect().commit();
         return rS.next()
-                ? new Usuario(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5),rS.getString(6), rS.getInt(7))
+                ? new Usuario(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5),rS.getString(6), rS.getInt(7), rS.getString(8))
                 : null;
     }
     
@@ -63,7 +64,7 @@ public class UsuarioDAO {
     
     public void actualizarUsuario(Usuario c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector = new Conexion();
-        String query = "UPDATE usuario SET Nombre = ?, Apellido_p = ?, Apellido_m = ?, Usuario = ?, Contrasenia=?, Tipo=?   WHERE idUsuario = ?";
+        String query = "UPDATE usuario SET Nombre = ?, Apellido_p = ?, Apellido_m = ?, Usuario = ?, Contrasenia=?, Tipo=?, email=?   WHERE idUsuario = ?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -76,6 +77,7 @@ public class UsuarioDAO {
         pS.setString(5, c.getUsuario());
         pS.setString(5, c.getContrasenia());
         pS.setInt(7, c.getTipo());
+        pS.setString(8, c.getEmail());
         pS.execute();
         conector.getConect().commit();
     }
@@ -97,9 +99,8 @@ public class UsuarioDAO {
 
         List<Usuario> lista = new ArrayList<>();
         while (rS.next()) {
-            lista.add(new Usuario(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5),rS.getString(6), rS.getInt(7)));
+            lista.add(new Usuario(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5),rS.getString(6), rS.getInt(7), rS.getString(8)));
         }
         return lista;
     }
 }
-

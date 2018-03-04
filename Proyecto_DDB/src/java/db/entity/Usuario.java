@@ -8,8 +8,17 @@ public class Usuario {
     private String usuario;
     private String contrasenia;
     private int tipo;
+    private String email;
 
-    public Usuario(int idUsuario, String nombre, String apellido_p, String apellido_m, String usuario, String contrasenia, int tipo) {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public Usuario(int idUsuario, String nombre, String apellido_p, String apellido_m, String usuario, String contrasenia, int tipo, String email) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido_p = apellido_p;
@@ -17,10 +26,11 @@ public class Usuario {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
         this.tipo = tipo;
+        this.email = email;
     }
     
     public Usuario(){
-        this(0,null,null,null,null,null,0);
+        this(0,null,null,null,null,null,0, null);
     }
     
     public String toString(){

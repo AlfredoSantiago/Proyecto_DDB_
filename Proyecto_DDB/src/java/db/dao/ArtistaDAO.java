@@ -47,7 +47,7 @@ public class ArtistaDAO {
                 : null;
     }
     
-    public void eliminarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void eliminarArtista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
         String query = "delete from Artista where idArtista=?";
         PreparedStatement pS;
