@@ -36,7 +36,7 @@
                 <div class="col-md-10 color-azul-fondo">
                     <ul class="nav justify-content-center margen">
                         <li class="nav-item">
-                            <a class="nav-link text-color-gris active btn btn-success" href="agregar_artista.html">AGREGAR</a>
+                            <a class="nav-link text-color-gris active btn btn-success" href="agregar_artista.jsp">AGREGAR</a>
                         </li>
                     </ul>
                     <div class="row">
@@ -47,8 +47,9 @@
                                     List<Artista> artistas = aDAO.getArtistas();
                                     
                                     for (int i = 0; i < artistas.size(); i++) {
+                                        String nombre = artistas.get(i).getNombre()+" "+artistas.get(i).getApellidoP()+" "+artistas.get(i).getApellidoM();
                                         out.println("<li class=\"list-group-item tranaparente \">\n"
-                                                + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + artistas.get(i).getNombre() + "</span></a>\n"
+                                                + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + nombre + "</span></a>\n"
                                                 + "     <button type=\"button\" onclick='eliminarArtista("+artistas.get(i).getIdArtista()+")' class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n"
                                                 + " </li>");
                                     }
