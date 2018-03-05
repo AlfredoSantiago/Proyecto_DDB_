@@ -220,7 +220,7 @@ public class Agregar extends HttpServlet {
         List canciones = uDAO.getCanciones();
         int id = canciones.size() + 1;
         while (true) {
-            Cancion aux = uDAO.buscarCancion(id);
+            Cancion aux = uDAO.buscarCancion1(id);
             if (aux == null) {
                 break;
             } else {
@@ -248,7 +248,7 @@ public class Agregar extends HttpServlet {
         List ListaReproducciones = lDAO.getListasReproduccion();
         int id = ListaReproducciones.size() + 1;
         while (true) {
-            ListaReproduccion aux = lDAO.buscarLista(id);
+            ListaReproduccion aux = (ListaReproduccion) lDAO.buscarLista(id);
             if (aux == null) {
                 break;
             } else {

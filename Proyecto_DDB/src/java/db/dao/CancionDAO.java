@@ -48,7 +48,23 @@ public class CancionDAO {
         }
         return lista;
     }
-    
+     public Cancion buscarCancion1(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        Conexion conector  = new Conexion();
+        String query = "select * from Cancion where idCancion = ?";
+        PreparedStatement pS;
+        ResultSet rS;
+        conector.setBd("proyecto_DDB");
+        conector.abrirConexion();
+        pS = conector.getConect().prepareStatement(query);
+        conector.getConect().setAutoCommit(false);
+        pS.setInt(1, id);
+        rS = pS.executeQuery();
+        conector.getConect().commit();
+        return rS.next()
+                ? new Cancion(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getInt(5))
+                : null;
+ 
+    }
     public void eliminarCancion(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
         String query = "delete from Cancion where idCancion=?";

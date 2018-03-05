@@ -66,7 +66,7 @@ public class Actualizar extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 try {
                     CancionDAO aDAO = new CancionDAO();
-                    Cancion a = aDAO.buscarCancion(id);
+                    Cancion a = aDAO.buscarCancion1(id);
                     session.setAttribute("cancion", a);
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
