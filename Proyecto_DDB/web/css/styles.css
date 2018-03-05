@@ -200,3 +200,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a552d', end
 .prueba{
 	background-color: red;
 }
+.chico{
+    width: 300px;
+}

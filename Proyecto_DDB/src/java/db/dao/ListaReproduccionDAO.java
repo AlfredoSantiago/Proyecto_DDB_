@@ -30,7 +30,7 @@ public class ListaReproduccionDAO {
     
     public ListaReproduccion buscarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from lista_de_reproducion where idLista = ?";
+        String query = "select * from lista_de_reproduccion where idLista = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");

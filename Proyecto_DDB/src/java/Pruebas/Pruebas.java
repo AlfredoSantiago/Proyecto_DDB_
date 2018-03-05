@@ -24,6 +24,11 @@ import java.text.SimpleDateFormat;
 
 public class Pruebas {
     public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException{
+<<<<<<< Updated upstream
+=======
+        Usuario u = new Usuario(4, "ALfredo", "Santiago", "Hernandez", "Alfredo", "pass", 3,"alfa@hotmail.com");
+        ListaReproduccion l = new ListaReproduccion(1 , "hola",2);
+>>>>>>> Stashed changes
         /*Cancion c = new Cancion(1,"yo si", "no lo se", "reguaetoonn", 1900);
         CancionDAO cDAO = new CancionDAO();
         cDAO.agregarCancion(c);
@@ -47,12 +52,21 @@ public class Pruebas {
         CancionListaDAO clDAO = new CancionListaDAO();
         clDAO.agregarCancionEnLista(cl);*/
         //System.out.println(d.getYear()+1900+" "+d.getDate()+" "+(d.getMonth()+1));
+<<<<<<< Updated upstream
         UsuarioDAO uDAO = new UsuarioDAO();
         Usuario u = new Usuario(1, "Jose", "Frnais", "Hernandez", "Alfredo", "pass", 3,"alfa");
         uDAO.actualizarUsuario(u);
         //uDAO.agregarUsuario(u);
         //uDAO.eliminarUsuario(1);
         System.out.println("");
+=======
+        //UsuarioDAO uDAO = new UsuarioDAO();
+        //uDAO.agregarUsuario(u);
+        ListaReproduccionDAO lDAO = new ListaReproduccionDAO();
+        lDAO.agregarListaDeReprodccion(l);
+        //uDAO.eliminarUsuario(1);
+
+>>>>>>> Stashed changes
         
     }
     

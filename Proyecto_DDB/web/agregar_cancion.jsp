@@ -34,6 +34,7 @@
                 </div>				
                 <div class="col-md-10 top-1000">
                     <div class="container">
+<<<<<<< Updated upstream
                         <%
                             if (c != null) {
                                 out.println("<form action=\"reupload?op=2\" method=\"post\" enctype=\"multipart/form-data\">	     		\n"
@@ -101,6 +102,41 @@
                                         + "                        </form>");
                             }
                         %>
+=======
+                        <form action="upload?op=2" method="post" enctype="multipart/form-data">	     		
+                            <div class="form-group tam ">
+                                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de la cacion">    
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="album" class="form-control" id="exampleInputPassword1" placeholder="Album">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="genero" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Genero">   
+                            </div>
+                            <div class="form-group">
+                                <label for="sel1">Artista:</label>
+                                <select name="artista" class="form-control" id="sel1">
+                                    <%
+                                        ArtistaDAO aDAO = new ArtistaDAO();
+                                        List<Artista> artistas = aDAO.getArtistas();
+                                        for (int i = 0; i < artistas.size(); i++) {
+                                            out.println("<option value='" + artistas.get(i).getIdArtista() + "'>" + artistas.get(i).getNombre() + "</option>"
+                                            );
+                                        }
+                                    %> 
+                                    <option value="0">Sin autor</option>
+                                </select>
+                            </div> 
+
+                            <div class="form-group">
+                                <input type="text" name="anio" class="form-control" id="exampleInputPassword1" placeholder="Año">
+                            </div>
+                            <input type="file" name="archivo" value="Seleccionar Archivo" class="btn btn-outline-secondary">
+                            <center style="padding-top: 30px">
+                                <button type="submit" class="btn btn-success btn-lg btn-block" ><b>REGISTRAR.</b></button>
+                            </center>
+                        </form>
+>>>>>>> Stashed changes
                     </div>
                 </div>
             </div>

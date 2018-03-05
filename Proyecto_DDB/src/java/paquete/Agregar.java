@@ -8,10 +8,16 @@ package paquete;
 import db.dao.ArtistaDAO;
 import db.dao.CancionArtistaDAO;
 import db.dao.CancionDAO;
+import db.dao.CancionListaDAO;
+import db.dao.DatosPagoDAO;
+import db.dao.ListaReproduccionDAO;
 import db.dao.UsuarioDAO;
 import db.entity.Artista;
 import db.entity.Cancion;
 import db.entity.CancionArtista;
+import db.entity.CancionLista;
+import db.entity.DatosPago;
+import db.entity.ListaReproduccion;
 import db.entity.Usuario;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -118,6 +124,63 @@ public class Agregar extends HttpServlet {
                 }
                 response.sendRedirect("artistas_admin.jsp");
                 return;
+            case 4:                
+                String nombre1 = request.getParameter("nombre");
+                String ap2 = request.getParameter("ApP");
+                String am2 = request.getParameter("ApM");
+                String ids =request.getParameter("id");
+                ids=ids.replaceAll("\\s*$","");
+                int id = Integer.parseInt(ids);
+                String noT = request.getParameter("noTarjeta");
+                String fecha = request.getParameter("fecha");
+                System.out.println(nombre1+ap2+am2+ids+noT+fecha);
+                DatosPago d;
+                try {
+                    d = new DatosPago(getIdDatosPago(),nombre1,ap2 ,am2 ,noT,fecha,id );
+                    DatosPagoDAO dDAO = new DatosPagoDAO();
+                    dDAO.agregarDatosPago(d);
+
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.sendRedirect("spotify.jsp");
+                return;
+            case 5:
+                String nombre3 = request.getParameter("nombre");
+                String ids3 = request.getParameter("id");
+                ids3 = ids3.replaceAll("\\s*$","");
+                int id3 = Integer.parseInt(ids3);
+                ListaReproduccion l;
+                try {
+                    l = new ListaReproduccion(getIdListaReproduccion(),nombre3, id3 );
+                    ListaReproduccionDAO lDAO = new ListaReproduccionDAO();
+                    lDAO.agregarListaDeReprodccion(l);
+
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.sendRedirect("playlist.jsp");
+                return;
+             case 6:
+                String idLista = request.getParameter("lista");
+                idLista = idLista.replaceAll("\\s*$","");;
+                int idLista1 = Integer.parseInt(idLista);
+                String ids4 = request.getParameter("id");
+                ids4 = ids4.replaceAll("\\s*$","");
+                int id4 = Integer.parseInt(ids4);
+                CancionLista Cl;
+                try {
+                    Cl = new CancionLista(idLista1,id4);
+                    CancionListaDAO ClDAO = new CancionListaDAO();
+                    ClDAO.agregarCancionEnLista(Cl);
+
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.sendRedirect("playlist.jsp");
+                return;
+            
+                
         }
         PrintWriter out = response.getWriter();
     }
@@ -158,6 +221,34 @@ public class Agregar extends HttpServlet {
         int id = canciones.size() + 1;
         while (true) {
             Cancion aux = uDAO.buscarCancion(id);
+            if (aux == null) {
+                break;
+            } else {
+                id++;
+            }
+        }
+        return id;
+    }
+    public int getIdDatosPago() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DatosPagoDAO uDAO = new DatosPagoDAO();
+        List datosapago = uDAO.getDatosPagos();
+        int id = datosapago.size() + 1;
+        while (true) {
+            DatosPago aux = uDAO.buscardatosPago(id);
+            if (aux == null) {
+                break;
+            } else {
+                id++;
+            }
+        }
+        return id;
+    }
+    public int getIdListaReproduccion() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ListaReproduccionDAO lDAO = new ListaReproduccionDAO();
+        List ListaReproducciones = lDAO.getListasReproduccion();
+        int id = ListaReproducciones.size() + 1;
+        while (true) {
+            ListaReproduccion aux = lDAO.buscarLista(id);
             if (aux == null) {
                 break;
             } else {

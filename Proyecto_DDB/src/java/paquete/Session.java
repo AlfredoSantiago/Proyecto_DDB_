@@ -49,8 +49,13 @@ public class Session extends HttpServlet {
                                 AdministradorDAO aDAO = new AdministradorDAO();
                                 Administrador a= aDAO.buscarAdministradorDeUsuario(usuarios.get(i).getIdUsuario());
                                 session.setAttribute("usuario", usuarios.get(i));
-                                session.setAttribute("admin", a);
+                                session.setAttribute("admin", a);                                
                                 response.sendRedirect("admin.jsp");
+                                return;
+                            }
+                            if(usuarios.get(i).getTipo()==1){                                
+                                session.setAttribute("usuario", usuarios.get(i));                         
+                                response.sendRedirect("spotify.jsp");
                                 return;
                             }
                         }
@@ -63,6 +68,7 @@ public class Session extends HttpServlet {
         }
         PrintWriter out = response.getWriter();
     }
+    
     public int getIdUsuario() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         UsuarioDAO uDAO = new UsuarioDAO();
         List usuarios = uDAO.getUsuarios();

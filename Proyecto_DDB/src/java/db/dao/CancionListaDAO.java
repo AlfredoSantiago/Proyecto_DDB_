@@ -80,7 +80,7 @@ public class CancionListaDAO {
     
     public List<CancionLista> getListaCanciones() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM Lista_cancion ORDER BY idCancion";
+        String query = "SELECT * FROM cancion_lista ORDER BY idCancion";
         PreparedStatement pS;
         ResultSet rS;
 
