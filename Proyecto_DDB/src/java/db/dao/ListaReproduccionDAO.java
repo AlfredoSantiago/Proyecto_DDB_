@@ -28,9 +28,9 @@ public class ListaReproduccionDAO {
         conector.cerrarConexion();
     }
     
-    public ListaReproduccion buscarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public List<ListaReproduccion> buscarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from lista_de_reproduccion where idLista = ?";
+        String query = "select * from lista_de_reproduccion where idUsuario = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -40,9 +40,11 @@ public class ListaReproduccionDAO {
         pS.setInt(1, id);
         rS = pS.executeQuery();
         conector.getConect().commit();
-        return rS.next()
-                ? new ListaReproduccion(rS.getInt(1), rS.getString(2), rS.getInt(3))
-                : null;
+        List<ListaReproduccion> lista = new ArrayList<>();
+        while (rS.next()) {
+            lista.add(new ListaReproduccion(rS.getInt(1), rS.getString(2), rS.getInt(3)));
+        }
+        return lista;
     }
     
     public void eliminarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{

@@ -44,11 +44,11 @@
 				    <a class="nav-link text-color-gris " href="Artistas.jsp">ARTISTAS</a>
 				  </li>
 				  <li class="nav-item">
-				     <a class="btn btn-success" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+				     <a class="btn btn-success" data-toggle="collapse" href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExample">
                                         NUEVA PLAYLIST.
                                       </a>                                      
 				  </li>
-                                  <div class="collapse" id="collapseExample">
+                                  <div class="collapse" id="collapseExamples">
                                     <div class="card card-body">
                                       <form action="upload?op=5" method="post">	     		
                                         <div class="form-group tam ">
@@ -67,16 +67,30 @@
                              
 			<div class="row ">
                             <% 
+                                ListaReproduccionDAO lDAO1 = new ListaReproduccionDAO();
+                                List < ListaReproduccion> ListaReproducciones1 = lDAO1.buscarLista(u.getIdUsuario());
+                                
                                 ListaReproduccionDAO lDAO = new ListaReproduccionDAO();
                                 List < ListaReproduccion> ListaReproducciones = lDAO.getListasReproduccion();
-                                for(int i = 0; i<ListaReproducciones.size(); i++){
-                                    if(ListaReproducciones.get(i).getIdUsuario()==u.getIdUsuario())
-                                    {
+                                CancionListaDAO ClDAO = new CancionListaDAO();
+                                
+                                CancionDAO Ca = new CancionDAO();
+                                List <Cancion> cancion = Ca.getCanciones();
+                                
+                                for(int i = 0; i<ListaReproducciones1.size(); i++){
+                                    List < CancionLista > l = ClDAO.buscarLista(i);
+                                    
                                     if(i<6){                                       
-                                        out.println("<div class=\"col-md-2\"><a href=\"#collapseExample2\" data-toggle=\"collapse\"><img src=\"src/Untitled-1.png\" class=\"img-fluid\" alt=\"Responsive image sombra \"></a><p class=\"color-blanco text-center texto-discos\">"+ListaReproducciones.get(i).getNombre()+"</p></div>"
-                                                +"<div class=\"collapse\" id=\"collapseExample2\"> \n"
-                                                +"    <div class=\"card card-body\"> \n"); 
+                                        out.println("<div class=\"col-md-2\"><a href=\"#collapseExample"+i+"\" data-toggle=\"collapse\"><img src=\"src/Untitled-1.png\" class=\"img-fluid\" alt=\"Responsive image sombra \"></a><p class=\"color-blanco text-center texto-discos\">"+ListaReproducciones1.get(i).getNombre()+"</p></div>"
+                                        +"<div class=\"collapse\" id=\"collapseExample"+i+"\"> \n"
+                                        +"<div class=\"card card-body\"> \n"); 
+                                       for(int o=0; o<l.size(); o++){
+                                       List <Cancion> cn = Ca.buscarCancion(l.get(o).getIdCancion());  
+                                       for(int t=0; t<cn.size();t++){
+                                                out.println("<option value='" +     cn.get(t).getNombre() + "'>" + cn.get(t).getNombre() + "</option>");
+                                               }
                                         
+                                       } 
                                         out.println("  </div> \n"
                                                 +"  </div> \n"                                        
                                         );                                        
@@ -84,7 +98,7 @@
                                         if(i<12){
                                           out.println("<div class=\"col-md-2\"><img src=\"src/Untitled-1.png\" class=\"img-fluid\" alt=\"Responsive image sombra \"><p class=\"color-blanco text-center texto-discos\">"+ListaReproducciones.get(i).getNombre()+"</p></div>");  
                                         }                                        
-                                    }
+                                    
                                 }
                                 }
                             %>

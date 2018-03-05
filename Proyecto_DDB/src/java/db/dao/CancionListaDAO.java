@@ -44,7 +44,7 @@ public class CancionListaDAO {
                 : null;
     }
     
-    public CancionLista buscarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public List<CancionLista> buscarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
         String query = "select * from cancion_lista where idLista = ?";
         PreparedStatement pS;
@@ -56,9 +56,11 @@ public class CancionListaDAO {
         pS.setInt(1, id);
         rS = pS.executeQuery();
         conector.getConect().commit();
-        return rS.next()
-                ? new CancionLista(rS.getInt(1), rS.getInt(2))
-                : null;
+       List<CancionLista> lista = new ArrayList<>();
+        while (rS.next()) {
+            lista.add(new CancionLista(rS.getInt(1), rS.getInt(2)));
+        }
+        return lista;
     }
     
     

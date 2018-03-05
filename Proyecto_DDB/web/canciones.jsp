@@ -73,14 +73,14 @@
                                                 for (int i = 0; i < canciones.size(); i++) {
                                                     out.println("<li class=\"list-group-item tranaparente \">\n"
                                                             + "     <a href=\"Canciones/"+canciones.get(i).getIdCancion()+".mp3\"><span class=\"text-color-gris\">" + canciones.get(i).getNombre() + "</span></a>\n"
-                                                             + "     <a class=\"btn btn-success float-right \" data-toggle=\"collapse\" href=\"#collapseExample\" role=\"button\" aria-expanded\false\" aria-controls=\"collapseExample\">\n"
+                                                             + "     <a class=\"btn btn-success float-right \" data-toggle=\"collapse\" href=\"#collapseExample"+i+"\" role=\"button\" aria-expanded\false\" aria-controls=\"collapseExample\">\n"
                                                                 + "         Agregar a Lista.\n"
                                                                  + "       </a>  \n"
                                                                     + " </li>"
                                                        );
                                                     out.println("<div class=\"float-right\">\n"
                                                                 + "<div class=\"chico float-right\">\n"
-                                                                + "<div class=\"collapse\" id=\"collapseExample\" class=\"chico float-right\">\n"
+                                                                + "<div class=\"collapse\" id=\"collapseExample"+i+"\" class=\"chico float-right\">\n"
                                                                 + "    <div class=\"card card-body\">\n"
                                                                 + "      <form action=\"upload?op=6\" method=\"post\">\n"
                                                                 + "<select name=\"lista\" class=\"form-control\" id=\"sel1\">\n"
