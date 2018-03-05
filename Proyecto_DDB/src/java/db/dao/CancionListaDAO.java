@@ -20,8 +20,8 @@ public class CancionListaDAO {
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
-        pS.setInt(1, c.getIdCancion());
-        pS.setInt(2, c.getIdLista());
+        pS.setInt(1, c.getIdLista());
+        pS.setInt(2, c.getIdCancion());
         pS.execute();
         conector.getConect().commit();
         conector.cerrarConexion();

@@ -14,9 +14,10 @@
 
     </head>
     <body>
-         <%
+        <%
             Usuario u = (Usuario) session.getAttribute("usuario");
             Administrador a = (Administrador) session.getAttribute("admin");
+            Artista ar = (Artista) session.getAttribute("artista");
             //out.println("hola: " + u.getNombre());
         %>
         <div class="container-fluid">
@@ -29,30 +30,51 @@
                         <a class="nav-link text-color-gris active" href="artistas_admin.jsp"><b>Artistas</b></a>
                         <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>		 
                     </nav>				    
-
                 </div>				
                 <div class="col-md-10 top-1000">
                     <div class="container">
-                        <form action="Agregar?op=3" method="post">	     		
-                            <div class="form-group tam ">
-                                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre del artista">    
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="ap" class="form-control" id="exampleInputPassword1" placeholder="Apellido Paterno">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="am" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Apellido Materno">   
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="desc" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Descrpcion">   
-                            </div>
-                            <center style="padding-top: 30px">
-                                <button type="submit" class="btn btn-success btn-lg btn-block" ><b>REGISTRAR.</b></button>
-                            </center>
-                        </form>
+                        <%
+                            if (ar != null) {
+                                out.println("<form action=\"Actualizar?op=3\" method=\"post\">	     		\n"
+                                        + "                            <div class=\"form-group tam \">\n"
+                                        + "                                <input type=\"text\" name=\"name\" value='"+ar.getNombre()+"'  class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Nombre del artista\">    \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"ap\" value='"+ar.getApellidoP()+"' class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Apellido Paterno\">\n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"am\" value='"+ar.getApellidoM()+"' class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Apellido Materno\">   \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"desc\" value='"+ar.getDescripcion()+"' class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Descrpcion\">   \n"
+                                        + "                            </div>\n"
+                                        + "                            <center style=\"padding-top: 30px\">\n"
+                                        + "                                <button type=\"submit\" class=\"btn btn-success btn-lg btn-block\" ><b>Actualizar</b></button>\n"
+                                        + "                            </center>\n"
+                                        + "                        </form>");
+                            } else {
+                                out.println("<form action=\"Agregar?op=3\" method=\"post\">	     		\n"
+                                        + "                            <div class=\"form-group tam \">\n"
+                                        + "                                <input type=\"text\" name=\"name\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Nombre del artista\">    \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"ap\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Apellido Paterno\">\n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"am\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Apellido Materno\">   \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"desc\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Descrpcion\">   \n"
+                                        + "                            </div>\n"
+                                        + "                            <center style=\"padding-top: 30px\">\n"
+                                        + "                                <button type=\"submit\" class=\"btn btn-success btn-lg btn-block\" ><b>REGISTRAR.</b></button>\n"
+                                        + "                            </center>\n"
+                                        + "                        </form>");
+                            }
+                        %>
+                        
                     </div>
                 </div>
             </div>
-
     </body>
 </html>

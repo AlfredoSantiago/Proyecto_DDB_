@@ -48,6 +48,7 @@
                                         out.println("<li class=\"list-group-item tranaparente \">\n"
                                                 + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + canciones.get(i).getNombre() + "</span></a>\n"
                                                 + "     <button type=\"button\" onclick='eliminarCancion("+canciones.get(i).getIdCancion()+")' class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n"
+                                                + "         <a type=\"button\" href='Actualizar?op=2&id=" + canciones.get(i).getIdCancion() + "' class=\"btn btn-outline-warning float-right\">EDITAR</a>"
                                                 + " </li>");
                                     }
                                 %>

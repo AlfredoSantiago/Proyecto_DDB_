@@ -70,14 +70,14 @@ public class UsuarioDAO {
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
-        pS.setInt(1, c.getIdUsuario());
-        pS.setString(2, c.getNombre());
-        pS.setString(3, c.getApellido_p());
-        pS.setString(4, c.getApellido_m());
-        pS.setString(5, c.getUsuario());
+        pS.setInt(8, c.getIdUsuario());
+        pS.setString(1, c.getNombre());
+        pS.setString(2, c.getApellido_p());
+        pS.setString(3, c.getApellido_m());
+        pS.setString(4, c.getUsuario());
         pS.setString(5, c.getContrasenia());
-        pS.setInt(7, c.getTipo());
-        pS.setString(8, c.getEmail());
+        pS.setInt(6, c.getTipo());
+        pS.setString(7, c.getEmail());
         pS.execute();
         conector.getConect().commit();
     }

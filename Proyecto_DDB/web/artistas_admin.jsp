@@ -43,14 +43,15 @@
                         <div class="col-md-12">
                             <ul id="playlist" class="list-group list-group-flush tranaparente">
                                 <%
-                                    ArtistaDAO aDAO=new ArtistaDAO();
+                                    ArtistaDAO aDAO = new ArtistaDAO();
                                     List<Artista> artistas = aDAO.getArtistas();
-                                    
+
                                     for (int i = 0; i < artistas.size(); i++) {
-                                        String nombre = artistas.get(i).getNombre()+" "+artistas.get(i).getApellidoP()+" "+artistas.get(i).getApellidoM();
+                                        String nombre = artistas.get(i).getNombre() + " " + artistas.get(i).getApellidoP() + " " + artistas.get(i).getApellidoM();
                                         out.println("<li class=\"list-group-item tranaparente \">\n"
                                                 + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + nombre + "</span></a>\n"
-                                                + "     <button type=\"button\" onclick='eliminarArtista("+artistas.get(i).getIdArtista()+")' class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n"
+                                                + "     <button type=\"button\" onclick='eliminarArtista(" + artistas.get(i).getIdArtista() + ")' class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n"
+                                                + "         <a type=\"button\" href='Actualizar?op=3&id=" + artistas.get(i).getIdArtista() + "' class=\"btn btn-outline-warning float-right\">EDITAR</a>"
                                                 + " </li>");
                                     }
                                 %>
@@ -64,7 +65,7 @@
                                         }
                                     }
                                 </script> 
-                                
+
                             </ul>
                         </div>
                     </div>	

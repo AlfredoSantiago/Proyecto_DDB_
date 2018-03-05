@@ -17,6 +17,7 @@
         <%
             Usuario u = (Usuario) session.getAttribute("usuario");
             Administrador a = (Administrador) session.getAttribute("admin");
+            Cancion c = (Cancion) session.getAttribute("cancion");
             //out.println("hola: " + u.getNombre());
         %>
         <div class="container-fluid">
@@ -33,38 +34,73 @@
                 </div>				
                 <div class="col-md-10 top-1000">
                     <div class="container">
-                        <form action="upload?op=2" method="post" enctype="multipart/form-data">	     		
-                            <div class="form-group tam ">
-                                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de la cacion">    
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="album" class="form-control" id="exampleInputPassword1" placeholder="Album">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="genero" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Genero">   
-                            </div>
-                            <div class="form-group">
-                                <label for="sel1">Artista:</label>
-                                <select name="artista" class="form-control" id="sel1">
-                                    <%
-                                        ArtistaDAO aDAO = new ArtistaDAO();
-                                        List<Artista> artistas = aDAO.getArtistas();
-                                        for (int i = 0; i < artistas.size(); i++) {
-                                            out.println("<option value='" + artistas.get(i).getIdArtista() + "'>" + artistas.get(i).getNombre() + "</option>");
-                                        }
-                                    %> 
-                                    <option value="0">Sin autor</option>
-                                </select>
-                            </div> 
-
-                            <div class="form-group">
-                                <input type="text" name="anio" class="form-control" id="exampleInputPassword1" placeholder="Año">
-                            </div>
-                            <input type="file" name="archivo" value="Seleccionar Archivo" class="btn btn-outline-secondary">
-                            <center style="padding-top: 30px">
-                                <button type="submit" class="btn btn-success btn-lg btn-block" ><b>REGISTRAR.</b></button>
-                            </center>
-                        </form>
+                        <%
+                            if (c != null) {
+                                out.println("<form action=\"reupload?op=2\" method=\"post\" enctype=\"multipart/form-data\">	     		\n"
+                                        + "                            <div class=\"form-group tam \">\n"
+                                        + "                                <input type=\"text\" value='" + c.getNombre() + "' name=\"name\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Nombre de la cacion\">    \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" value='" + c.getAlbum() + "' name=\"album\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Album\">\n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" value='" + c.getGenero() + "' name=\"genero\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Genero\">   \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <label for=\"sel1\">Artista:</label>\n"
+                                        + "                                <select name=\"artista\" class=\"form-control\" id=\"sel1\">\n"
+                                        + "                                    \n");
+                                ArtistaDAO aDAO = new ArtistaDAO();
+                                List<Artista> artistas = aDAO.getArtistas();
+                                for (int i = 0; i < artistas.size(); i++) {
+                                    out.println("<option value='" + artistas.get(i).getIdArtista() + "'>" + artistas.get(i).getNombre() + "</option>");
+                                }
+                                out.println("<option value=\"0\">Sin autor</option>\n"
+                                        + "                                </select>\n"
+                                        + "                            </div> \n"
+                                        + "\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" value='" + c.getAnio() + "' name=\"anio\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Año\">\n"
+                                        + "                            </div>\n"
+                                        + "                            <input type=\"file\" name=\"archivo\" value=\"Seleccionar Archivo\" class=\"btn btn-outline-secondary\">\n"
+                                        + "                            <center style=\"padding-top: 30px\">\n"
+                                        + "                                <button type=\"submit\" class=\"btn btn-success btn-lg btn-block\" ><b>REGISTRAR.</b></button>\n"
+                                        + "                            </center>\n"
+                                        + "                        </form>");
+                            } else {
+                                out.println("<form action=\"upload?op=2\" method=\"post\" enctype=\"multipart/form-data\">	     		\n"
+                                        + "                            <div class=\"form-group tam \">\n"
+                                        + "                                <input type=\"text\" name=\"name\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Nombre de la cacion\">    \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"album\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Album\">\n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"genero\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Genero\">   \n"
+                                        + "                            </div>\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <label for=\"sel1\">Artista:</label>\n"
+                                        + "                                <select name=\"artista\" class=\"form-control\" id=\"sel1\">\n"
+                                        + "                                    \n");
+                                ArtistaDAO aDAO = new ArtistaDAO();
+                                List<Artista> artistas = aDAO.getArtistas();
+                                for (int i = 0; i < artistas.size(); i++) {
+                                    out.println("<option value='" + artistas.get(i).getIdArtista() + "'>" + artistas.get(i).getNombre() + "</option>");
+                                }
+                                out.println("<option value=\"0\">Sin autor</option>\n"
+                                        + "                                </select>\n"
+                                        + "                            </div> \n"
+                                        + "\n"
+                                        + "                            <div class=\"form-group\">\n"
+                                        + "                                <input type=\"text\" name=\"anio\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Año\">\n"
+                                        + "                            </div>\n"
+                                        + "                            <input type=\"file\" name=\"archivo\" value=\"Seleccionar Archivo\" class=\"btn btn-outline-secondary\">\n"
+                                        + "                            <center style=\"padding-top: 30px\">\n"
+                                        + "                                <button type=\"submit\" class=\"btn btn-success btn-lg btn-block\" ><b>REGISTRAR.</b></button>\n"
+                                        + "                            </center>\n"
+                                        + "                        </form>");
+                            }
+                        %>
                     </div>
                 </div>
             </div>
