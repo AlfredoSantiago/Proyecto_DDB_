@@ -55,6 +55,9 @@
 				  <li class="nav-item">
 				    <a class="nav-link text-color-gris" href="canciones.jsp">CANCIONES.</a>
 				  </li>
+                                  <li class="nav-item">
+				    <a class="nav-link text-color-gris" href="albumes.jsp">AlBUMES.</a>
+				  </li>
 				</ul>
 				<H1><b><center class="color-blanco margen">A darle hasta que amanezca: total, manana es domingo</center></b> </H1>	
 			<div class="row ">

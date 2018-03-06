@@ -18,17 +18,32 @@
       <%
             Usuario u = (Usuario) session.getAttribute("usuario");
             Administrador a = (Administrador) session.getAttribute("admin");
-            //out.println("hola: " + u.getNombre());
+            List<DatosPago> datosPago = null;
+            DatosPagoDAO dtDAO = new DatosPagoDAO();
+            datosPago = dtDAO.getDatosPagos();
         %>
 	<div class="container-fluid">
 		<div class="row ">
 			<div class="col-md-2 colo2"></div>
 			<div class="col-md-2 colo margen-tabLeft" >				
 					<nav class="nav flex-column ">
-					  <a class="nav-link text-color-gris " href="spotify.jsp"><b>Inicio</b></a>
-					  <a class="nav-link text-color-gris active" href="playlist.jsp"><b>Tu musica</b></a>		
-					  <li class="nav-link text-color-gris" >Jonathan</li>	
-					  <a class="nav-link text-color-gris" href="#.html"><b>Cerrar sesion</b></a>			 
+					  <a class="nav-link text-color-gris " href="canciones.jsp"><b>Inicio</b></a>
+					  <a class="nav-link text-color-gris active" href="playlist.jsp"><b>Tu musica</b></a>	
+                                          <%       if(datosPago.size()==0){
+                                                    out.println("<a class='nav-link text-color-gris' href='premium.jsp'><b>HAZTE PREIUM</b></a>");
+                                                    }   
+                                                int  v = 0;
+                                                 for(int p=0; p<datosPago.size(); p++){
+                                                 if(datosPago.get(p).getIdUsuario()==u.getIdUsuario()){                                                     
+                                                     v=1;                                                    
+                                                 }                                                
+                                                } 
+                                                if(v==0){
+                                                    out.println("<a class='nav-link text-color-gris' href='premium.jsp'><b>HAZTE PREIUM</b></a>");
+                                                }                                            
+                                            %>	
+					  <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>	
+					  <a class="nav-link text-color-gris" href="login.html"><b>Cerrar sesion</b></a>		 
 					</nav>			    
 			
 			</div>				
@@ -36,9 +51,6 @@
 				<ul class="nav justify-content-center margen">
 				  <li class="nav-item">
 				    <a class="nav-link text-color-gris  " href="playlist.jsp">PLAYLISTS</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link text-color-gris " href="albumes.jsp">ALBUMES</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link text-color-gris active" href="artistas.jsp">ARTISTAS</a>

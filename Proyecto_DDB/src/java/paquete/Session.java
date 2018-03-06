@@ -55,7 +55,7 @@ public class Session extends HttpServlet {
                             }
                             if(usuarios.get(i).getTipo()==1){                                
                                 session.setAttribute("usuario", usuarios.get(i));                         
-                                response.sendRedirect("spotify.jsp");
+                                response.sendRedirect("canciones.jsp");
                                 return;
                             }
                         }

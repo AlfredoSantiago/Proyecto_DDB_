@@ -29,8 +29,8 @@
 			<div class="col-md-2 colo2"></div>
 			<div class="col-md-2 colo margen-tabLeft" >				
 					<nav class="nav flex-column ">
-					  <a class="nav-link text-color-gris active" href="spotify.html"><b>Inicio</b></a>
-					  <a class="nav-link text-color-gris" href="playlist.html"><b>Tu musica</b></a>
+					  <a class="nav-link text-color-gris active" href="spotify.jsp"><b>Inicio</b></a>
+					  <a class="nav-link text-color-gris" href="playlist.jsp"><b>Tu musica</b></a>
                                           <%               
                                               
                                                  for(int p=0; p<datosPago.size(); p++){

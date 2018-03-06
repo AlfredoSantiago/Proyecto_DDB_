@@ -1,8 +1,3 @@
-<%-- 
-    Document   : canciones
-    Created on : 04-mar-2018, 13:49:09
-    Author     : avile
---%>
 <%@page import="db.dao.ListaReproduccionDAO"%>
 <%@page import="db.dao.ArtistaDAO"%>
 <%@page import="java.util.List"%>
@@ -33,7 +28,7 @@
 			<div class="col-md-2 colo2"></div>
 			<div class="col-md-2 colo margen-tabLeft" >				
 					<nav class="nav flex-column ">
-					  <a class="nav-link text-color-gris active" href="spotify.jsp"><b>Inicio</b></a>
+					  <a class="nav-link text-color-gris active" href="canciones.jsp"><b>Inicio</b></a>
 					  <a class="nav-link text-color-gris" href="playlist.jsp"><b>Tu musica</b></a>	
                                           <%       if(datosPago.size()==0){
                                                     out.println("<a class='nav-link text-color-gris' href='premium.jsp'><b>HAZTE PREIUM</b></a>");
@@ -55,11 +50,12 @@
 			</div>				
 			<div class="col-md-10 color-cafe-fondo">
 				<ul class="nav justify-content-center margen">
-				  <li class="nav-item">
-				    <a class="nav-link text-color-gris " href="spotify.jsp">SELECCIONADOS</a>
-				  </li>
+				  
 				  <li class="nav-item">
 				     <a class="nav-link text-color-gris active" href="canciones.jsp">CANCIONES.</a>
+				  </li>                                  
+                                  <li class="nav-item">
+                                      <a class="nav-link text-color-gris" href="albumes.jsp">LAS PLAYLIST DE TODOS.</a>
 				  </li>
 				</ul>
 				<H1><b><center class="color-blanco margen">Canciones</center></b> </H1>	
@@ -86,11 +82,15 @@
                                                                 + "<select name=\"lista\" class=\"form-control\" id=\"sel1\">\n"
                                                                
                                                     );
-                                                                        ListaReproduccionDAO lDAO = new ListaReproduccionDAO();   
-                                                                        List <ListaReproduccion>  listaReproduccion = lDAO.getListasReproduccion();
-                                                                        for(int o=0; o<listaReproduccion.size(); o++){
-                                                                                      out.println("<option value='" + listaReproduccion.get(o).getIdLista() + "'>" + listaReproduccion.get(o).getNombre() + "</option>"
-                                                                             );
+                                                                        
+                                                                        ListaReproduccionDAO lDAO1 = new ListaReproduccionDAO(); 
+                                                                        List <ListaReproduccion>  listaReproduccion1 = lDAO1.buscarLista(u.getIdUsuario());
+                                                                        for(int o=0; o<listaReproduccion1.size(); o++){
+                                                                            if(listaReproduccion1.size()==0){
+                                                                                
+                                                                            }else{
+                                                                               out.println("<option value='" + listaReproduccion1.get(o).getIdLista() + "'>" + listaReproduccion1.get(o).getNombre() + "</option>");
+                                                                            }
                                                                         }                                                     
                                                      out.println("</select>\n"
                                                              

@@ -46,6 +46,26 @@ public class ListaReproduccionDAO {
         }
         return lista;
     }
+     public ListaReproduccion buscarLista1(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+ 
+        Conexion conector  = new Conexion();
+        String query = "select * from lista_de_reproduccion where idLista = ?";
+ 
+        PreparedStatement pS;
+        ResultSet rS;
+        conector.setBd("proyecto_DDB");
+        conector.abrirConexion();
+        pS = conector.getConect().prepareStatement(query);
+        conector.getConect().setAutoCommit(false);
+        pS.setInt(1, id);
+        rS = pS.executeQuery();
+        conector.getConect().commit();
+         return rS.next() 
+                ? new ListaReproduccion(rS.getInt(1), rS.getString(2), rS.getInt(3))
+ 
+                : null;
+
+    }
     
     public void eliminarLista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();

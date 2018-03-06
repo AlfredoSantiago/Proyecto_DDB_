@@ -13,76 +13,103 @@
 	<link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
     <body>
-          <%
+         <%
             Usuario u = (Usuario) session.getAttribute("usuario");
             Administrador a = (Administrador) session.getAttribute("admin");
-            //out.println("hola: " + u.getNombre());
+            List<DatosPago> datosPago = null;
+            DatosPagoDAO dtDAO = new DatosPagoDAO();
+            datosPago = dtDAO.getDatosPagos();
         %>
        <div class="container-fluid">
 		<div class="row ">
 			<div class="col-md-2 colo2"></div>
 			<div class="col-md-2 colo margen-tabLeft" >				
 					<nav class="nav flex-column ">
-					  <a class="nav-link text-color-gris " href="spotify.jsp"><b>Inicio</b></a>
-					  <a class="nav-link text-color-gris active" href="playlist.jsp"><b>Tu musica</b></a>	
-					  <li class="nav-link text-color-gris" >Jonathan</li>	
-					  <a class="nav-link text-color-gris" href="#.html"><b>Cerrar sesion</b></a>				 
-					</nav>			    
+					  <a class="nav-link text-color-gris active" href="canciones.jsp"><b>Inicio</b></a>
+					  <a class="nav-link text-color-gris" href="playlist.jsp"><b>Tu musica</b></a>	
+                                          <%       if(datosPago.size()==0){
+                                                    out.println("<a class='nav-link text-color-gris' href='premium.jsp'><b>HAZTE PREIUM</b></a>");
+                                                    }   
+                                                int  v = 0;
+                                                 for(int p=0; p<datosPago.size(); p++){
+                                                 if(datosPago.get(p).getIdUsuario()==u.getIdUsuario()){                                                     
+                                                     v=1;                                                    
+                                                 }                                                
+                                                } 
+                                                if(v==0){
+                                                    out.println("<a class='nav-link text-color-gris' href='premium.jsp'><b>HAZTE PREIUM</b></a>");
+                                                }                                            
+                                            %>	
+					  <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>	
+					  <a class="nav-link text-color-gris" href="login.html"><b>Cerrar sesion</b></a>		 
+					</nav>				    
 			
 			</div>				
 			<div class="col-md-10 color-cafe2-fondo">
 				<ul class="nav justify-content-center margen">
+				  
 				  <li class="nav-item">
-				    <a class="nav-link text-color-gris  " href="playlist.jsp">PLAYLISTS</a>
+				    <a class="nav-link text-color-gris" href="canciones.jsp">CANCIONES.</a>
 				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link text-color-gris active" href="albumes.jsp">ALBUMES</a>
+                                  <li class="nav-item">
+				    <a class="nav-link text-color-gris active"  href="albumes.jsp">LAS PLAYLIST DE TODOS.</a>
 				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link text-color-gris " href="Artistas.jsp">ARTISTAS</a>
-				  </li>
-				  <li class="nav-item">
-				     <a class="btn btn-success" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        NUEVA PLAYLIST.
-                                      </a>                                      
-				  </li>
-                                  <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                      <form action="upload?op=5" method="post">	     		
-                                        <div class="form-group tam ">
-                                            <input type="hidden" class="form-control" name="id" placeholder="Nombre" value='<%out.println(u.getIdUsuario());%>'>    
-                                            <input type="text" class="form-control" name="nombre" placeholder="Nombre">    
-                                        </div>
-                                        <center style="padding-top: 30px">
-                                            <button type="submit" class="btn btn-success btn-lg btn-block" ><b>AGREGAR.</b></button>
-                                        </center>
-                                       </form>
-                                  </div>
-                                  </div>
 				</ul>
-			<div class="row ">
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image sombra "><p class="color-blanco text-center texto-discos">Pop</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Latina</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Mexico</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Tv</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Romantica</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Indie</p></div>
-			</div>
-			<div class="row ">
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Clasicas</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Jazz</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Concentracion</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Gaming</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Punk</p></div>
-				<div class="col-md-2"><img src="src/Untitled-1.png" class="img-fluid" alt="Responsive image"><p class="color-blanco text-center texto-discos">Dance</p></div>
-			</div>
+                            <div class="row ">
+                                <%  ListaReproduccionDAO lDAO = new  ListaReproduccionDAO();
+                                    List <ListaReproduccion> ListasReproduccion = lDAO.getListasReproduccion();
+                                    
+                                    CancionListaDAO ClDAO = new CancionListaDAO();
+                                    CancionDAO Ca = new CancionDAO();
+                                    for(int i = 0; i<ListasReproduccion.size(); i++){
+                                     List < CancionLista > l = ClDAO.buscarLista(ListasReproduccion.get(i).getIdLista());
+                                        if(i<6){
+                                             out.println("<div class=\"col-md-2\">"
+                                                + "<a href=\"#collapseExample"+i+"\" data-toggle=\"collapse\">"
+                                                + "<img src=\"src/Untitled-1.png\" class=\"img-fluid\" alt=\"Responsive image sombra \">"
+                                                + "</a>"
+                                                + "<p class=\"color-blanco text-center texto-discos\">"+ListasReproduccion.get(i).getNombre()+""
+                                                + "</p>"
+                                                + "</div>"
+                                        +"<div class=\"collapse\" id=\"collapseExample"+i+"\"> \n"
+                                        +"<div class=\"card card-body\"> \n"); 
+                                             for(int o=0; o<l.size(); o++){
+                                       List <Cancion> cn = Ca.buscarCancion(l.get(o).getIdCancion());  
+                                       out.println("<ul id=\"playlist\" class=\"list-group list-group-flush tranaparente\"> ");
+                                       
+                                       for(int t=0; t<cn.size();t++){
+                                          out.println("<li class=\"list-group-item tranaparente \">\n");
+                                            out.println("<a href=\"Canciones/"+cn.get(t).getIdCancion()+".mp3\"><span>" + cn.get(t).getNombre() + "</span></a>\n");
+                                             out.println("</li>"); 
+                                               }
+                                        
+                                       } 
+                                             out.println("  </div> \n"
+                                                +"  </div> \n"                                        
+                                        ); 
+                                            
+                                        }     
+                                    }
+                                   
+                                    
+                                %>
+                                </div>
 			</div>
 		</div>
 		<FOOTER>
 			<nav class="navbar fixed-bottom navbar-light footer">
-			  <a class="navbar-brand" href="#">Reproductor</a>
+				<div class="center">
+			  <audio src="" controls id="audioPlayer">
+        			Sorry, your browser doesn't support html5!
+    			</audio>    
+    			</div>			
 			</nav>	
 		</FOOTER>
 	</div>
-</body>
+	<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    <script src="./js/audioPlayer.js"></script>
+    <script>
+        audioPlayer();
+    </script>
+    </body>
 </html>

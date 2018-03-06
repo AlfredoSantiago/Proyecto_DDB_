@@ -248,7 +248,7 @@ public class Agregar extends HttpServlet {
         List ListaReproducciones = lDAO.getListasReproduccion();
         int id = ListaReproducciones.size() + 1;
         while (true) {
-            ListaReproduccion aux = (ListaReproduccion) lDAO.buscarLista(id);
+            ListaReproduccion aux = lDAO.buscarLista1(id);
             if (aux == null) {
                 break;
             } else {

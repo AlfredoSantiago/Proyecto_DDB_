@@ -35,7 +35,7 @@
                 <div class="col-md-10 color-azul-fondo">
                     <ul class="nav justify-content-center margen">
                         <li class="nav-item">
-                            <a class="nav-link text-color-gris active btn btn-success" href="agregar_usuario.html">AGREGAR</a>
+                            <a class="nav-link text-color-gris active btn btn-success" href="agregar_usuario.jsp">AGREGAR</a>
                         </li>
                     </ul>
                     <div class="row">
