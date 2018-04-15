@@ -36,23 +36,41 @@
                         <li class="nav-item">
                             <a class="nav-link text-color-gris active btn btn-success" href="agregar_cancion.jsp">AGREGAR</a>
                         </li>
-                    </ul>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul id="playlist" class="list-group list-group-flush tranaparente">
-                                <%
-                                    CancionDAO cDAO = new CancionDAO();
+                    </ul>	
+                     <div class="row">
+                         <div class="col-md-12">
+                             <table class="table table-dark">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Cancion</th>
+                                    <th scope="col">No.Reproducciones</th>
+                                    <th scope="col">Accion </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        CancionDAO cDAO = new CancionDAO();
                                     List<Cancion> canciones = cDAO.getCanciones();
-
                                     for (int i = 0; i < canciones.size(); i++) {
-                                        out.println("<li class=\"list-group-item tranaparente \">\n"
-                                                + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + canciones.get(i).getNombre() + "</span></a>\n"
-                                                + "     <button type=\"button\" onclick='eliminarCancion("+canciones.get(i).getIdCancion()+")' class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n"
-                                                + "         <a type=\"button\" href='Actualizar?op=2&id=" + canciones.get(i).getIdCancion() + "' class=\"btn btn-outline-warning float-right\">EDITAR</a>"
-                                                + " </li>");
+                                    out.println(" <tr>\n"
+                                               +" <th scope=\"row\">"+i+"</th>\n"
+                                               +" <td><span class=\"text-color-gris\">" + canciones.get(i).getNombre() + "</span></td>\n"
+                                               +" <td><p class=\"float-right\">"+i*80+"</p></td>\n"
+                                               +" <td><button type=\"button\" onclick='eliminarCancion("+canciones.get(i).getIdCancion()+")' class=\"btn btn-danger float-right\">ELIMINAR</button>"
+                                               + "<a type=\"button\" href='Actualizar?op=2&id=" + canciones.get(i).getIdCancion() + "' class=\"btn btn-warning float-right\">EDITAR</a>"
+                                               + "</td>\n"
+                                               
+                                              +"</tr> ");
+                                    
                                     }
-                                %>
-                                <script>
+                                    
+
+                                    %>
+                                    
+                                </tbody>
+                             </table>
+                                    <script>
                                     function eliminarCancion(id) {
                                         if (confirm('¿Estas seguro de querer eliminar la Canción?')) {
                                             //console.log('si');
@@ -61,10 +79,10 @@
                                             });
                                         }
                                     }
-                                </script>     
-                            </ul>
-                        </div>
-                    </div>	
+                                </script> 
+                         </div>                             
+                     </div>            
+                    
                 </div>
             </div>
     </body>

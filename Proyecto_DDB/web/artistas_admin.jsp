@@ -50,8 +50,8 @@
                                         String nombre = artistas.get(i).getNombre() + " " + artistas.get(i).getApellidoP() + " " + artistas.get(i).getApellidoM();
                                         out.println("<li class=\"list-group-item tranaparente \">\n"
                                                 + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + nombre + "</span></a>\n"
-                                                + "     <button type=\"button\" onclick='eliminarArtista(" + artistas.get(i).getIdArtista() + ")' class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n"
-                                                + "         <a type=\"button\" href='Actualizar?op=3&id=" + artistas.get(i).getIdArtista() + "' class=\"btn btn-outline-warning float-right\">EDITAR</a>"
+                                                + "     <button type=\"button\" onclick='eliminarArtista(" + artistas.get(i).getIdArtista() + ")' class=\"btn btn-danger float-right\">ELIMINAR</button>\n"
+                                                + "         <a type=\"button\" href='Actualizar?op=3&id=" + artistas.get(i).getIdArtista() + "' class=\"btn btn-warning float-right\">EDITAR</a>"
                                                 + " </li>");
                                     }
                                 %>

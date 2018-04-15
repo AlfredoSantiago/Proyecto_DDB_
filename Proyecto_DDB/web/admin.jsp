@@ -48,8 +48,8 @@
                                         String nombre = usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellido_p() + " " + usuarios.get(i).getApellido_m();
                                         out.println("<li class=\"list-group-item tranaparente \">\n"
                                                 + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + nombre + "</span></a>\n"
-                                                + "     <button type=\"button\" onclick='eliminarUsuario(" + usuarios.get(i).getIdUsuario() + ")' class=\"btn btn-outline-danger float-right\">ELIMINAR</button>\n"
-                                                + "         <a type=\"button\" href='Actualizar?op=1&id=" + usuarios.get(i).getIdUsuario() + "' class=\"btn btn-outline-warning float-right\">EDITAR</a>"
+                                                + "     <button type=\"button\" onclick='eliminarUsuario(" + usuarios.get(i).getIdUsuario() + ")' class=\"btn btn-danger float-right\">ELIMINAR</button>\n"
+                                                + "     <a type=\"button\" href='Actualizar?op=1&id=" + usuarios.get(i).getIdUsuario() + "' class=\"btn btn-warning float-right\">EDITAR</a>"
                                                 + " </li>\n");
                                     }
                                 %>

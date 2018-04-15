@@ -69,19 +69,19 @@
                                                 for (int i = 0; i < canciones.size(); i++) {
                                                     out.println("<li class=\"list-group-item tranaparente \">\n"
                                                             + "     <a href=\"Canciones/"+canciones.get(i).getIdCancion()+".mp3\"><span class=\"text-color-gris\">" + canciones.get(i).getNombre() + "</span></a>\n"
-                                                             + "     <a class=\"btn btn-success float-right \" data-toggle=\"collapse\" href=\"#collapseExample"+i+"\" role=\"button\" aria-expanded\false\" aria-controls=\"collapseExample\">\n"
+                                                             + "     <a class=\"btn btn-success float-right  \" data-toggle=\"collapse\" href=\"#collapseExample"+i+"\" role=\"button\" aria-expanded\false\" aria-controls=\"collapseExample\">\n"
                                                                 + "         Agregar a Lista.\n"
                                                                  + "       </a>  \n"
                                                                     + " </li>"
                                                        );
-                                                    out.println("<div class=\"float-right\">\n"
-                                                                + "<div class=\"chico float-right\">\n"
-                                                                + "<div class=\"collapse\" id=\"collapseExample"+i+"\" class=\"chico float-right\">\n"
-                                                                + "    <div class=\"card card-body\">\n"
-                                                                + "      <form action=\"upload?op=6\" method=\"post\">\n"
-                                                                + "<select name=\"lista\" class=\"form-control\" id=\"sel1\">\n"
-                                                               
-                                                    );
+                                                            out.println("<div class=\"float-right\">\n"
+                                                                        + "<div class=\"chico float-right\">\n"
+                                                                        + "<div class=\"collapse\" id=\"collapseExample"+i+"\" class=\"chico float-right\">\n"
+                                                                        + "    <div class=\"card card-body\">\n"
+                                                                        + "      <form action=\"upload?op=6\" method=\"post\">\n"
+                                                                        + "<select name=\"lista\" class=\"form-control\" id=\"sel1\">\n"
+
+                                                            );
                                                                         
                                                                         ListaReproduccionDAO lDAO1 = new ListaReproduccionDAO(); 
                                                                         List <ListaReproduccion>  listaReproduccion1 = lDAO1.buscarLista(u.getIdUsuario());
@@ -92,17 +92,16 @@
                                                                                out.println("<option value='" + listaReproduccion1.get(o).getIdLista() + "'>" + listaReproduccion1.get(o).getNombre() + "</option>");
                                                                             }
                                                                         }                                                     
-                                                     out.println("</select>\n"
-                                                             
-                                                                + "<input type=\"hidden\" class=\"form-control\" name=\"id\" placeholder=\"Nombre\" value=\""+canciones.get(i).getIdCancion()+"\">"
-                                                                + "        <center style=\"padding-top: 30px\">\n"
-                                                                + "            <button type=\"submit\" class=\"btn btn-success btn-lg btn-block\" ><b>AGREGAR.</b></button>\n"
-                                                                + "        </center>\n"
-                                                                + "       </form>\n"
-                                                                         +"</div>\n"
-                                                                +"</div>\n"
-                                                                + "  </div>\n"
-                                                                + "  </div>"
+                                                                        out.println("</select>\n"                                                             
+                                                                                   + "<input type=\"hidden\" class=\"form-control\" name=\"id\" placeholder=\"Nombre\" value=\""+canciones.get(i).getIdCancion()+"\">"
+                                                                                   + "        <center style=\"padding-top: 30px\">\n"
+                                                                                   + "            <button type=\"submit\" class=\"btn btn-success btn-lg btn-block\" ><b>AGREGAR.</b></button>\n"
+                                                                                   + "        </center>\n"
+                                                                                   + "       </form>\n"
+                                                                                            +"</div>\n"
+                                                                                   +"</div>\n"
+                                                                                   + "  </div>\n"
+                                                                                   + "  </div>"
                                   );
                                                 }
                                             %>
@@ -122,6 +121,7 @@
 			</nav>	
 		</FOOTER>
 	</div>
+                                    
 	<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
     <script src="./js/audioPlayer.js"></script>
     <script>
