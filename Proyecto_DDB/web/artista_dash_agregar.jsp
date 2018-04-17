@@ -16,8 +16,9 @@
     <body>
         <%
             Usuario u = (Usuario) session.getAttribute("usuario");
-            Administrador a = (Administrador) session.getAttribute("admin");
+            //Administrador a = (Administrador) session.getAttribute("admin");
             Cancion c = (Cancion) session.getAttribute("cancion");
+            Artista a = (Artista) session.getAttribute("artista");
             //out.println("hola: " + u.getNombre());
         %>
         <div class="container-fluid">
@@ -25,10 +26,9 @@
                 <div class="col-md-2 colo2"></div>
                 <div class="col-md-2 colo margen-tabLeft" >				
                     <nav class="nav flex-column ">
-                        <a class="nav-link text-color-gris " href="admin.jsp"><b>Usuarios</b></a>
-                        <a class="nav-link text-color-gris active" href="canciones_admin.jsp"><b>Canciones</b></a>	
-                        <a class="nav-link text-color-gris" href="artistas_admin.jsp"><b>Artistas</b></a>
-                        <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>		 
+                        <a class="nav-link text-color-gris " href="artista_dash.jsp"><b>Inicio</b></a>
+                        <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>
+                        <a class="nav-link text-color-gris" href="#.html"><b>Cerrar sesion</b></a>
                     </nav>					    
 
                 </div>				
@@ -36,7 +36,7 @@
                     <div class="container">
                         <%
                             if (c != null) {
-                                out.println("<form action=\"reupload?op=2\" method=\"post\" enctype=\"multipart/form-data\">	     		\n"
+                                out.println("<form action=\"reupload?op=4\" method=\"post\" enctype=\"multipart/form-data\">	     		\n"
                                         + "                            <div class=\"form-group tam \">\n"
                                         + "                                <input type=\"text\" value='" + c.getNombre() + "' name=\"name\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Nombre de la cancion\">    \n"
                                         + "                            </div>\n"
@@ -50,14 +50,7 @@
                                         + "                                <label for=\"sel1\">Artista:</label>\n"
                                         + "                                <select name=\"artista\" class=\"form-control\" id=\"sel1\">\n"
                                         + "                                    \n");
-                                ArtistaDAO aDAO = new ArtistaDAO();
-                                List<Artista> artistas = aDAO.getArtistas();
-                                for (int i = 0; i < artistas.size(); i++) {
-                                    UsuarioDAO uaDAO = new UsuarioDAO();
-                                    Usuario ua = uaDAO.buscarUsuario(artistas.get(i).getIdUsuario());
-                                    out.println("<option value='" + artistas.get(i).getIdArtista() + "'>" + ua.getNombre() + "</option>");
-                                }
-                                out.println("<option value=\"0\">Sin autor</option>\n"
+                                out.println("<option value=\""+a.getIdArtista()+"\">"+u.getNombre()+"</option>\n"
                                         + "                                </select>\n"
                                         + "                            </div> \n"
                                         + "\n"
@@ -70,7 +63,7 @@
                                         + "                            </center>\n"
                                         + "                        </form>");
                             } else {
-                                out.println("<form action=\"upload?op=2\" method=\"post\" enctype=\"multipart/form-data\">	     		\n"
+                                out.println("<form action=\"upload?op=7\" method=\"post\" enctype=\"multipart/form-data\">	     		\n"
                                         + "                            <div class=\"form-group tam \">\n"
                                         + "                                <input type=\"text\" name=\"name\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Nombre de la cancion\">    \n"
                                         + "                            </div>\n"
@@ -84,14 +77,8 @@
                                         + "                                <label for=\"sel1\">Artista:</label>\n"
                                         + "                                <select name=\"artista\" class=\"form-control\" id=\"sel1\">\n"
                                         + "                                    \n");
-                                ArtistaDAO aDAO = new ArtistaDAO();
-                                List<Artista> artistas = aDAO.getArtistas();
-                                for (int i = 0; i < artistas.size(); i++) {
-                                    UsuarioDAO uaDAO = new UsuarioDAO();
-                                    Usuario ua = uaDAO.buscarUsuario(artistas.get(i).getIdUsuario());
-                                    out.println("<option value='" + artistas.get(i).getIdArtista() + "'>" + ua.getNombre() + "</option>");
-                                }
-                                out.println("<option value=\"0\">Sin autor</option>\n"
+                                
+                                out.println("<option value=\""+a.getIdArtista()+"\">"+u.getNombre()+"</option>\n"
                                         + "                                </select>\n"
                                         + "                            </div> \n"
                                         + "\n"

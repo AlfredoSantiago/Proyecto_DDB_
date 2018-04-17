@@ -19,8 +19,8 @@ public class CancionArtistaDAO {
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
-        pS.setInt(1, c.getIdCancion());
-        pS.setInt(2, c.getIdArtista());
+        pS.setInt(1, c.getIdArtista());
+        pS.setInt(2, c.getIdCancion());
         pS.execute();
         conector.getConect().commit();
         conector.cerrarConexion();
@@ -28,7 +28,7 @@ public class CancionArtistaDAO {
     
     public CancionArtista buscarCancion(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from cancion_artista where idCancion";
+        String query = "select * from cancion_artista where idCancion=?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -45,7 +45,7 @@ public class CancionArtistaDAO {
     
     public CancionArtista buscarArtista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from cancion_artista where idArtista";
+        String query = "select * from cancion_artista where idArtista=?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -62,7 +62,7 @@ public class CancionArtistaDAO {
     
     public void eliminarCancionArtista(CancionArtista ca) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "delete from cancion_lista where idArtista=? and idCancion=?";
+        String query = "delete from cancion_artista where idArtista=? and idCancion=?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -77,7 +77,7 @@ public class CancionArtistaDAO {
     
     public List<CancionArtista> getListaCanciones() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM Lista_cancion ORDER BY idCancion";
+        String query = "SELECT * FROM cancion_artista ORDER BY idCancion";
         PreparedStatement pS;
         ResultSet rS;
 
@@ -87,6 +87,30 @@ public class CancionArtistaDAO {
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
 
+        rS = pS.executeQuery();
+        conector.getConect().commit();
+
+        List<CancionArtista> lista = new ArrayList<>();
+        while (rS.next()) {
+            lista.add(new CancionArtista(rS.getInt(1), rS.getInt(2)));
+        }
+        return lista;
+    }
+    
+    public List<CancionArtista> getListaCancionesArtista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Conexion conector = new Conexion();
+        String query = "SELECT * FROM cancion_artista where idArtista=? ORDER BY idCancion";
+        PreparedStatement pS;
+        ResultSet rS;
+
+        conector.setBd("proyecto_DDB");
+        conector.abrirConexion();
+
+        
+        pS = conector.getConect().prepareStatement(query);
+        conector.getConect().setAutoCommit(false);
+        pS.setInt(1, id);
+        
         rS = pS.executeQuery();
         conector.getConect().commit();
 

@@ -1,4 +1,4 @@
-z
+
 package Pruebas;
 
 import db.dao.ArtistaDAO;
@@ -24,17 +24,20 @@ import java.text.SimpleDateFormat;
 
 public class Pruebas {
     public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException{
-<<<<<<< Updated upstream
-=======
-        Usuario u = new Usuario(4, "ALfredo", "Santiago", "Hernandez", "Alfredo", "pass", 3,"alfa@hotmail.com");
-        ListaReproduccion l = new ListaReproduccion(1 , "hola",2);
->>>>>>> Stashed changes
-        /*Cancion c = new Cancion(1,"yo si", "no lo se", "reguaetoonn", 1900);
-        CancionDAO cDAO = new CancionDAO();
-        cDAO.agregarCancion(c);
-        Artista a = new Artista(1, "Alfredo", "Santiago", "Hernandez","Es la pura verga este wey");
-        ArtistaDAO aDAO = new ArtistaDAO();
-        aDAO.agregarArtista(a);
+        CancionArtista ca = new CancionArtista(3,1);
+        CancionArtistaDAO caDAO = new CancionArtistaDAO();
+        caDAO.agregarCancionArtista(ca);
+        //Usuario u = new Usuario(4, "ALfredo", "Santiago", "Hernandez", "Alfredo", "pass", 4,"alfa@hotmail.com");
+        //UsuarioDAO uDAO = new UsuarioDAO();
+        //uDAO.agregarUsuario(u);
+        //Artista a = new Artista(1 ,"Es la pura verga este wey", 4);
+        //ArtistaDAO aDAO = new ArtistaDAO();
+        //aDAO.agregarArtista(a);
+        //ListaReproduccion l = new ListaReproduccion(1 , "hola",2);
+        //Cancion c = new Cancion(1,"yo si", "no lo se", "reguaetoonn", 0,1900);
+        //CancionDAO cDAO = new CancionDAO();
+        //cDAO.agregarCancion(c);
+        
         /*Administrador a = new Administrador(1,"CZER#", 1);
         AdministradorDAO aDAO = new AdministradorDAO();
         aDAO.agregarAdministrador(a);
@@ -42,31 +45,25 @@ public class Pruebas {
         DatosPago dp= new DatosPago(2, "Alfredo", "Santiago", "Hernandez", "5555222444326676", "2017-03-12", 1);
         DatosPagoDAO dpDAO = new DatosPagoDAO();
         dpDAO.agregarDatosPago(dp);
-        CancionArtista ca = new CancionArtista(1,1);
-        CancionArtistaDAO caDAO = new CancionArtistaDAO();
-        caDAO.agregarCancionArtista(ca);*/
-        /*ListaReproduccion lr = new ListaReproduccion(1,"Gustosculposos", 1);
+        
+        ListaReproduccion lr = new ListaReproduccion(1,"Gustosculposos", 1);
         ListaReproduccionDAO lrDAO = new ListaReproduccionDAO();
         lrDAO.agregarListaDeReprodccion(lr);
         CancionLista cl = new CancionLista(1,1);
         CancionListaDAO clDAO = new CancionListaDAO();
-        clDAO.agregarCancionEnLista(cl);*/
+        clDAO.agregarCancionEnLista(cl);
         //System.out.println(d.getYear()+1900+" "+d.getDate()+" "+(d.getMonth()+1));
-<<<<<<< Updated upstream
         UsuarioDAO uDAO = new UsuarioDAO();
-        Usuario u = new Usuario(1, "Jose", "Frnais", "Hernandez", "Alfredo", "pass", 3,"alfa");
+        //Usuario u = new Usuario(1, "Jose", "Frnais", "Hernandez", "Alfredo", "pass", 3,"alfa");
         uDAO.actualizarUsuario(u);
         //uDAO.agregarUsuario(u);
         //uDAO.eliminarUsuario(1);
         System.out.println("");
-=======
         //UsuarioDAO uDAO = new UsuarioDAO();
         //uDAO.agregarUsuario(u);
         ListaReproduccionDAO lDAO = new ListaReproduccionDAO();
         lDAO.agregarListaDeReprodccion(l);
-        //uDAO.eliminarUsuario(1);
-
->>>>>>> Stashed changes
+        //uDAO.eliminarUsuario(1);*/
         
     }
     

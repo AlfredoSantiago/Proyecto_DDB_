@@ -44,10 +44,12 @@
                             <ul id="playlist" class="list-group list-group-flush tranaparente">
                                 <%
                                     ArtistaDAO aDAO = new ArtistaDAO();
+                                    UsuarioDAO uaDAO = new UsuarioDAO();
                                     List<Artista> artistas = aDAO.getArtistas();
 
                                     for (int i = 0; i < artistas.size(); i++) {
-                                        String nombre = artistas.get(i).getNombre() + " " + artistas.get(i).getApellidoP() + " " + artistas.get(i).getApellidoM();
+                                        Usuario ua = uaDAO.buscarUsuario(artistas.get(i).getIdUsuario());
+                                        String nombre = ua.getNombre() + " " + ua.getApellido_p() + " " + ua.getApellido_m();
                                         out.println("<li class=\"list-group-item tranaparente \">\n"
                                                 + "     <a href=\"src/2.mp3\"><span class=\"text-color-gris\">" + nombre + "</span></a>\n"
                                                 + "     <button type=\"button\" onclick='eliminarArtista(" + artistas.get(i).getIdArtista() + ")' class=\"btn btn-danger float-right\">ELIMINAR</button>\n"

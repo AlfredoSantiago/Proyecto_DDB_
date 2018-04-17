@@ -6,8 +6,10 @@
 package paquete;
 
 import db.dao.AdministradorDAO;
+import db.dao.ArtistaDAO;
 import db.dao.UsuarioDAO;
 import db.entity.Administrador;
+import db.entity.Artista;
 import db.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,6 +58,14 @@ public class Session extends HttpServlet {
                             if(usuarios.get(i).getTipo()==1){                                
                                 session.setAttribute("usuario", usuarios.get(i));                         
                                 response.sendRedirect("canciones.jsp");
+                                return;
+                            }
+                            if(usuarios.get(i).getTipo()==4){
+                                session.setAttribute("usuario", usuarios.get(i));
+                                ArtistaDAO aDAO = new ArtistaDAO();
+                                Artista a = aDAO.getArtista_Usuario(usuarios.get(i).getIdUsuario());
+                                session.setAttribute("artista", a);
+                                response.sendRedirect("artista_dash.jsp");
                                 return;
                             }
                         }

@@ -75,15 +75,29 @@ public class Actualizar extends HttpServlet {
                 return;
             //case 3 subir al session un artista
             case 3:
-                id = Integer.parseInt(request.getParameter("id"));
+                id = Integer.parseInt(request.getParameter("id"));          
                 try {
                     ArtistaDAO aDAO = new ArtistaDAO();
                     Artista a = aDAO.buscarArtista(id);
+                    UsuarioDAO uaDAO =  new UsuarioDAO();
+                    Usuario ua = uaDAO.buscarUsuario(a.getIdUsuario());
                     session.setAttribute("artista", a);
+                    session.setAttribute("ua", ua);
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 response.sendRedirect("agregar_artista.jsp");
+                return;
+            case 4:
+                id = Integer.parseInt(request.getParameter("id"));
+                try {
+                    CancionDAO aDAO = new CancionDAO();
+                    Cancion a = aDAO.buscarCancion1(id);
+                    session.setAttribute("cancion", a);
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response.sendRedirect("artista_dash_agregar.jsp");
                 return;
         }
         PrintWriter out = response.getWriter();
@@ -156,20 +170,65 @@ public class Actualizar extends HttpServlet {
                 return;
             case 3:
                 Artista ar = (Artista) session.getAttribute("artista");
-                ar.setNombre(request.getParameter("name"));
-                ar.setApellidoP(request.getParameter("ap"));
-                ar.setApellidoM(request.getParameter("am"));
+                //Usuario
+                u = (Usuario) session.getAttribute("ua");
+                u.setNombre(request.getParameter("name"));
+                u.setApellido_p(request.getParameter("ap"));
+                u.setApellido_m(request.getParameter("am"));
+                u.setEmail(request.getParameter("email"));
+                u.setUsuario(request.getParameter("user"));
+                u.setContrasenia(request.getParameter("pass"));
+                
                 ar.setDescripcion(request.getParameter("desc"));
                 try {
+                    UsuarioDAO uDAO = new UsuarioDAO();
+                    uDAO.actualizarUsuario(u);
                     ArtistaDAO aDAO = new ArtistaDAO();
                     aDAO.actualizarArtista(ar);
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 session.setAttribute("artista", null);
+                session.setAttribute("ua", null);
                 response.sendRedirect("artistas_admin.jsp");
                 return;
             case 4:
+                c = (Cancion) session.getAttribute("cancion");
+                c.setNombre(request.getParameter("name"));
+                c.setAlbum(request.getParameter("album"));
+                c.setGenero(request.getParameter("genero"));
+                c.setAnio(Integer.parseInt(request.getParameter("anio")));
+                //int idArtista = Integer.parseInt(request.getParameter("artista"));
+                try {
+                    CancionDAO cDAO = new CancionDAO();
+                    cDAO.actualizarCancion(c);
+                    //CancionArtista ca = new CancionArtista(idArtista, idCancion);
+                    //CancionArtistaDAO caDAO = new CancionArtistaDAO();
+                    //caDAO.agregarCancionArtista(ca);
+
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                arch = request.getPart("archivo");
+                if (arch != null && arch.getSize()!=0) {
+                    InputStream is = arch.getInputStream();
+                    ServletContext context = this.getServletContext();
+                    String ruta = context.getRealPath("/");
+                    File f = new File(ruta + "\\Canciones/" + c.getIdCancion() + ".mp3");
+                    FileOutputStream ous = new FileOutputStream(f);
+                    int dato = is.read();
+                    while (dato != -1) {
+                        ous.write(dato);
+                        dato = is.read();
+                    }
+                    ous.close();
+                    is.close();
+                }
+                session.setAttribute("cancion", null);
+                response.sendRedirect("artista_dash.jsp");
+                return;
+                
 
         }
         PrintWriter out = response.getWriter();

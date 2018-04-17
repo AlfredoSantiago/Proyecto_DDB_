@@ -13,7 +13,7 @@ public class ArtistaDAO {
     
     public void agregarArtista(Artista a) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into Artista values(?,?,?,?,?)";
+        String query = "insert into Artista values(?,?,?)";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -21,10 +21,8 @@ public class ArtistaDAO {
         conector.getConect().setAutoCommit(false);
         
         pS.setInt(1, a.getIdArtista());
-        pS.setString(2, a.getNombre());
-        pS.setString(3, a.getApellidoP());
-        pS.setString(4, a.getApellidoM());
-        pS.setString(5, a.getDescripcion());
+        pS.setString(2, a.getDescripcion());
+        pS.setInt(3, a.getIdUsuario());
         pS.execute();
         conector.getConect().commit();
         conector.cerrarConexion();
@@ -43,7 +41,24 @@ public class ArtistaDAO {
         rS = pS.executeQuery();
         conector.getConect().commit();
         return rS.next()
-                ? new Artista(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5))
+                ? new Artista(rS.getInt(1), rS.getString(2), rS.getInt(3))
+                : null;
+    }
+    
+    public Artista getArtista_Usuario(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        Conexion conector  = new Conexion();
+        String query = "select * from Artista where idUsuario = ?";
+        PreparedStatement pS;
+        ResultSet rS;
+        conector.setBd("proyecto_DDB");
+        conector.abrirConexion();
+        pS = conector.getConect().prepareStatement(query);
+        conector.getConect().setAutoCommit(false);
+        pS.setInt(1, id);
+        rS = pS.executeQuery();
+        conector.getConect().commit();
+        return rS.next()
+                ? new Artista(rS.getInt(1), rS.getString(2), rS.getInt(3))
                 : null;
     }
     
@@ -63,17 +78,14 @@ public class ArtistaDAO {
     
     public void actualizarArtista(Artista c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector = new Conexion();
-        String query = "UPDATE Artista SET Nombre = ?, Apellido_p = ?, Apellido_m = ?, descripcion = ? where idArtista=?";
+        String query = "UPDATE Artista SET descripcion = ? where idArtista=?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
-        pS.setString(1, c.getNombre());
-        pS.setString(2, c.getApellidoP());
-        pS.setString(3, c.getApellidoM());
-        pS.setString(4, c.getDescripcion());
-        pS.setInt(5, c.getIdArtista());
+        pS.setString(1, c.getDescripcion());
+        pS.setInt(2, c.getIdArtista());
         pS.execute();
         conector.getConect().commit();
     }
@@ -95,7 +107,7 @@ public class ArtistaDAO {
 
         List<Artista> lista = new ArrayList<>();
         while (rS.next()) {
-            lista.add(new Artista(rS.getInt(1), rS.getString(2), rS.getString(3), rS.getString(4), rS.getString(5)));
+            lista.add(new Artista(rS.getInt(1), rS.getString(2), rS.getInt(3)));
         }
         return lista;
     }

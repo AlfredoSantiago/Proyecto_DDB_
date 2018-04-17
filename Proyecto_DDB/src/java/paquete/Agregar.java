@@ -83,7 +83,7 @@ public class Agregar extends HttpServlet {
                 int idCancion=0;
                 try {
                     idCancion = getIdCancion();
-                    c = new Cancion(idCancion, nombre, album, genero, anio);
+                    c = new Cancion(idCancion, nombre, album, genero, 0, anio);
                     CancionDAO cDAO = new CancionDAO();
                     cDAO.agregarCancion(c);
                     CancionArtista ca = new CancionArtista(idArtista, idCancion);
@@ -113,10 +113,17 @@ public class Agregar extends HttpServlet {
                 nombre = request.getParameter("name");
                 ap = request.getParameter("ap");
                 am = request.getParameter("am");
+                email = request.getParameter("email");
+                user = request.getParameter("user");
+                pass = request.getParameter("pass");
                 String desc = request.getParameter("desc");
                 Artista a;
                 try {
-                    a = new Artista(getIdArtista(), nombre, ap, am, desc);
+                    int id = getIdUsuario();
+                    u = new Usuario(id, nombre, ap, am, user, pass, 1, email);
+                    UsuarioDAO uaDAO = new UsuarioDAO();
+                    uaDAO.agregarUsuario(u);
+                    a = new Artista(getIdArtista(), desc, id);
                     ArtistaDAO aDAO = new ArtistaDAO();
                     aDAO.agregarArtista(a);
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
@@ -139,7 +146,6 @@ public class Agregar extends HttpServlet {
                     d = new DatosPago(getIdDatosPago(),nombre1,ap2 ,am2 ,noT,fecha,id );
                     DatosPagoDAO dDAO = new DatosPagoDAO();
                     dDAO.agregarDatosPago(d);
-
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -178,6 +184,42 @@ public class Agregar extends HttpServlet {
                     Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 response.sendRedirect("playlist.jsp");
+                return;
+                
+            case 7:
+                nombre = request.getParameter("name");
+                album = request.getParameter("album");
+                genero = request.getParameter("genero");
+                idArtista = Integer.parseInt(request.getParameter("artista"));
+                anio = Integer.parseInt(request.getParameter("anio"));
+                idCancion=0;
+                try {
+                    idCancion = getIdCancion();
+                    c = new Cancion(idCancion, nombre, album, genero, 0, anio);
+                    CancionDAO cDAO = new CancionDAO();
+                    cDAO.agregarCancion(c);
+                    CancionArtista ca = new CancionArtista(idArtista, idCancion);
+                    CancionArtistaDAO caDAO = new CancionArtistaDAO();
+                    caDAO.agregarCancionArtista(ca);
+
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                                
+                arch = request.getPart("archivo");
+                is = arch.getInputStream();
+                context = this.getServletContext();
+                ruta = context.getRealPath("/");
+                f = new File(ruta + "\\Canciones/" + idCancion + ".mp3");
+                ous = new FileOutputStream(f);
+                dato = is.read();
+                while (dato != -1) {
+                    ous.write(dato);
+                    dato = is.read();
+                }
+                ous.close();
+                is.close();
+                response.sendRedirect("artista_dash.jsp");
                 return;
             
                 

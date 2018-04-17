@@ -16,7 +16,8 @@
     <body>
         <%
             Usuario u = (Usuario) session.getAttribute("usuario");
-            Administrador a = (Administrador) session.getAttribute("admin");
+            Artista a = (Artista) session.getAttribute("artista");
+            //Administrador a = (Administrador) session.getAttribute("admin");
             //out.println("hola: " + u.getNombre());
         %>
         <div class="container-fluid">
@@ -24,17 +25,16 @@
                 <div class="col-md-2 colo2"></div>
                 <div class="col-md-2 colo margen-tabLeft" >				
                     <nav class="nav flex-column ">
-                        <a class="nav-link text-color-gris " href="admin.jsp"><b>Usuarios</b></a>
-                        <a class="nav-link text-color-gris active" href="canciones_admin.jsp"><b>Canciones</b></a>	
-                        <a class="nav-link text-color-gris" href="artistas_admin.jsp"><b>Artistas</b></a>
-                        <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>		 
+                        <a class="nav-link text-color-gris " href="artista_dash.jsp"><b>Inicio</b></a>
+                        <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>
+                        <a class="nav-link text-color-gris" href="#.html"><b>Cerrar sesion</b></a>
                     </nav>					    
 
                 </div>				
                 <div class="col-md-10 color-azul-fondo">
                     <ul class="nav justify-content-center margen">
                         <li class="nav-item">
-                            <a class="nav-link text-color-gris active btn btn-success" href="agregar_cancion.jsp">AGREGAR</a>
+                            <a class="nav-link text-color-gris active btn btn-success" href="artista_dash_agregar.jsp">AGREGAR</a>
                         </li>
                     </ul>	
                      <div class="row">
@@ -50,15 +50,17 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        CancionDAO cDAO = new CancionDAO();
-                                    List<Cancion> canciones = cDAO.getCanciones();
-                                    for (int i = 0; i < canciones.size(); i++) {
+                                    CancionArtistaDAO cDAO = new CancionArtistaDAO();
+                                    List<CancionArtista> cancion_artista = cDAO.getListaCancionesArtista(a.getIdArtista());
+                                    CancionDAO caDAO = new CancionDAO(); 
+                                    for (int i = 0; i < cancion_artista.size(); i++) {
+                                        Cancion canciones = caDAO.buscarCancion1(cancion_artista.get(i).getIdCancion());
                                     out.println(" <tr>\n"
                                                +" <th scope=\"row\">"+i+"</th>\n"
-                                               +" <td><span class=\"text-color-gris\">" + canciones.get(i).getNombre() + "</span></td>\n"
-                                               +" <td><p>"+canciones.get(i).getNo_reproducciones()+"</p></td>\n"
-                                               +" <td><button type=\"button\" onclick='eliminarCancion("+canciones.get(i).getIdCancion()+")' class=\"btn btn-danger \">ELIMINAR</button>"
-                                               + "<a type=\"button\" href='Actualizar?op=2&id=" + canciones.get(i).getIdCancion() + "' class=\"btn btn-warning\">EDITAR</a>"
+                                               +" <td><span class=\"text-color-gris\">" + canciones.getNombre() + "</span></td>\n"
+                                               +" <td><p>"+canciones.getNo_reproducciones()+"</p></td>\n"
+                                               +" <td><button type=\"button\" onclick='eliminarCancion("+canciones.getIdCancion()+")' class=\"btn btn-danger \">ELIMINAR</button>"
+                                               + "<a type=\"button\" href='Actualizar?op=4&id=" + canciones.getIdCancion() + "' class=\"btn btn-warning\">EDITAR</a>"
                                                + "</td>\n"
                                                
                                               +"</tr> ");
