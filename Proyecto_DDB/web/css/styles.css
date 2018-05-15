@@ -88,6 +88,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a552d', end
 	margin-top: 30px;
 	margin-bottom: 40px;
 }
+.margen-10{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
 .discos{
 	margin-bottom: 20px

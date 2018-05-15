@@ -27,6 +27,7 @@
                         <a class="nav-link text-color-gris " href="admin.jsp"><b>Usuarios</b></a>
                         <a class="nav-link text-color-gris active" href="canciones_admin.jsp"><b>Canciones</b></a>	
                         <a class="nav-link text-color-gris" href="artistas_admin.jsp"><b>Artistas</b></a>
+                        <a class="nav-link text-color-gris" href="FragmentacionHorizontal.jsp"><b>Fragmentaciónes.</b></a>
                         <li class="nav-link text-color-gris" ><%out.println(u.getNombre());%></li>		 
                     </nav>					    
 
