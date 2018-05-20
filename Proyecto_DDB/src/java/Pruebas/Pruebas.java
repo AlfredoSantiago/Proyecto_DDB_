@@ -1,7 +1,7 @@
 
 package Pruebas;
 
-import db.dao.ArtistaDAO;
+/*import db.dao.ArtistaDAO;
 import db.dao.CancionDAO;
 import db.dao.UsuarioDAO;
 import db.dao.AdministradorDAO;
@@ -223,4 +223,4 @@ public class Pruebas {
     }
     
 
-}
+}*/
