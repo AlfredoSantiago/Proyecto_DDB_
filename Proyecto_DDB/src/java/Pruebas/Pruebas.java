@@ -1,7 +1,7 @@
 
 package Pruebas;
 
-/*import db.dao.ArtistaDAO;
+import db.dao.ArtistaDAO;
 import db.dao.CancionDAO;
 import db.dao.UsuarioDAO;
 import db.dao.AdministradorDAO;
@@ -26,18 +26,88 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.jaudiotagger.audio.AudioFile;
+/*import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.*;
 import org.jaudiotagger.tag.*;
-import org.jaudiotagger.tag.id3.ID3v11Tag;
+import org.jaudiotagger.tag.id3.ID3v11Tag;*/
 
 public class Pruebas {
-    public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException, FileNotFoundException, IOException, CannotReadException, TagException, ReadOnlyFileException, InvalidAudioFrameException{
+    public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException, FileNotFoundException, IOException{
+       /* File archivo = new File ("Listas.txt"); //nombre del archivo donde se guardan los nombres
+        FileReader fr = new FileReader (archivo);
+        BufferedReader br = new BufferedReader(fr);
+        ListaReproduccion lr = new ListaReproduccion();
+        ListaReproduccionDAO lrDAO = new ListaReproduccionDAO();
+        ArrayList<String> ls = new ArrayList<String>();
+        Random r = new Random();
+        for(int i=0; i<64; i++){
+            String aux = br.readLine();
+            ls.add(aux);
+        }
+        UsuarioDAO udao = new UsuarioDAO();
+        List<Usuario> users =  udao.getUsuarios();
+        
+        for(int i=0; i<users.size(); i++){
+            if(users.get(i).getTipo()<3){
+                int nl = 1+ r.nextInt(1);
+                for(int j=0; j<nl; j++){
+                    int index = r.nextInt(63);
+                    lr = new ListaReproduccion(getIdListaReproduccion(), ls.get(index), users.get(i).getIdUsuario());
+                    lrDAO.agregarListaDeReprodccion(lr);
+                }
+            }
+        }*/
+        /*Random r = new Random();
+        ListaReproduccionDAO ldao =new ListaReproduccionDAO();
+        CancionDAO cdao = new CancionDAO();
+        List<ListaReproduccion> lr = ldao.getListasReproduccion();
+        List<Cancion> lc = cdao.getCanciones();
+        
+        CancionListaDAO cldao = new CancionListaDAO();
+        for(int i =0; i<lr.size(); i++){
+            int nl = 1+ r.nextInt(2);
+            int aux1=0;
+            for(int j=0; j<nl; j++){
+                int x = 1+ r.nextInt(92);
+                if(x!=aux1){
+                    CancionLista cl = new CancionLista(lr.get(i).getIdLista(), x);
+                    cldao.agregarCancionEnLista(cl);
+                }
+                aux1 = x;
+            }
+        }*/
+        
+        Random r = new Random();
+        ListaReproduccionDAO ldao =new ListaReproduccionDAO();
+        CancionDAO cdao = new CancionDAO();
+        List<ListaReproduccion> lr = ldao.getListasReproduccion();
+        List<Cancion> lc = cdao.getCanciones();
+        ArtistaDAO adao= new ArtistaDAO();
+        List<Artista> la = adao.getArtistas();
+        CancionListaDAO cldao = new CancionListaDAO();
+        CancionArtistaDAO cadao = new CancionArtistaDAO();
+        for(int i =0; i<la.size(); i++){
+            //int nl = 1+ r.nextInt(2);
+            //int aux1=0;
+            //for(int j=0; j<nl; j++){
+                int x = 1+ r.nextInt(92);
+            //    if(x!=aux1){
+                    CancionArtista ca = new CancionArtista(lr.get(i).getIdLista(), x);
+                    cadao.agregarCancionArtista(ca);
+//CancionLista cl = new CancionLista(lr.get(i).getIdLista(), x);
+                    
+//cldao.agregarCancionEnLista(cl);
+            //    }
+            //    aux1 = x;
+            //}
+        }
+        
         //Agregar Usuarios de los 4 tipos
-        Usuario u = new Usuario();
+        /*Usuario u = new Usuario();
         UsuarioDAO uDAO = new UsuarioDAO();
         String [] emails = {"@hotmail.com", "@gmail.com", "@outlook.es", "@yahoo.com.mx", "@ipn.mx", "@inbox.com", "@gmx.com", "@fastmail.com"};
         int email;
@@ -99,7 +169,7 @@ public class Pruebas {
                     aDAO.agregarAdministrador(Ad);
                     break;
                 case 4:
-                    int ciudad = r.nextInt(11);
+                    int ciudad = r.nextInt(9);
                     int genero = r.nextInt(8);
                     String desc = "Nació en la ciudad de "+Ciudad[ciudad]+". Mejor conocido por tocar el genero de "+Genero[genero];
                     Artista ar = new Artista(getIdArtista(), desc, Usuarios.get(i).getIdUsuario());
@@ -108,11 +178,11 @@ public class Pruebas {
                 default:
                     break;
             }
-        }
+        }*/
         
         
         //Agregar Canciones
-        AudioFile audiofile; 
+        /*AudioFile audiofile; 
         Tag tag;
         File f = new File("Canciones"); //nombre de la carpeta
         File[] canciones = f.listFiles();
@@ -130,7 +200,24 @@ public class Pruebas {
                 canciones[i].renameTo(nuevo);
             }
             //System.out.println(canciones[i].getName());
-        }
+        }*/
+        /*Random r = new Random();
+        CancionDAO cdao = new CancionDAO();
+        List<Cancion> canciones = cdao.getCanciones();
+        int numero = r.nextInt(1000);
+        for(int i=0; i<canciones.size(); i++){
+            cdao.incrementarReproducciones(canciones.get(i).getIdCancion(), numero);
+            numero = r.nextInt(1000);
+        }*/
+        
+        /*UsuarioDAO uDAO = new UsuarioDAO();
+        List<Usuario> users = uDAO.getUsuarios();
+        for(int i=0; i<users.size(); i++){
+            if(users.get(i).getTipo() <3 ){
+                
+            }
+        }*/
+        
     }
     public static int getIdUsuario() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         UsuarioDAO uDAO = new UsuarioDAO();
@@ -223,4 +310,4 @@ public class Pruebas {
     }
     
 
-}*/
+}

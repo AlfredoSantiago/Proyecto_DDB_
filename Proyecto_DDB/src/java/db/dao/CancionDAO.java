@@ -97,15 +97,16 @@ public class CancionDAO {
         conector.getConect().commit();
     }
 
-    public void incrementarReproducciones(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void incrementarReproducciones(int id, int n) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector = new Conexion();
-        String query = "UPDATE Cancion SET no_reproducciones = no_reproducciones+1   WHERE idcancion = ?";
+        String query = "UPDATE Cancion SET no_reproducciones = ?   WHERE idcancion = ?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
-        pS.setInt(1, id);
+        pS.setInt(1, n);
+        pS.setInt(2, id);
         pS.execute();
         conector.getConect().commit();
     }
