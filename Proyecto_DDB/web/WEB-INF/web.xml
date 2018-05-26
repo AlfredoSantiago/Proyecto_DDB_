@@ -20,6 +20,10 @@
         <servlet-name>Actualizar</servlet-name>
         <servlet-class>paquete.Actualizar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Fragmentacion</servlet-name>
+        <servlet-class>paquete.Fragmentacion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>Actualizar</servlet-name>
         <url-pattern>/Actualizar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Fragmentacion</servlet-name>
+        <url-pattern>/Fragmentacion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

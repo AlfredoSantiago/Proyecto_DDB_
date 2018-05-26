@@ -37,7 +37,10 @@ import org.jaudiotagger.tag.id3.ID3v11Tag;*/
 
 public class Pruebas {
     public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException, FileNotFoundException, IOException{
-       /* File archivo = new File ("Listas.txt"); //nombre del archivo donde se guardan los nombres
+        AdministradorDAO adao = new AdministradorDAO();
+        int i =adao.count("idAdministrador", ">", "1000");
+        System.out.println("i: "+i);
+        /* File archivo = new File ("Listas.txt"); //nombre del archivo donde se guardan los nombres
         FileReader fr = new FileReader (archivo);
         BufferedReader br = new BufferedReader(fr);
         ListaReproduccion lr = new ListaReproduccion();
@@ -81,7 +84,7 @@ public class Pruebas {
             }
         }*/
         
-        Random r = new Random();
+        /*Random r = new Random();
         ListaReproduccionDAO ldao =new ListaReproduccionDAO();
         CancionDAO cdao = new CancionDAO();
         List<ListaReproduccion> lr = ldao.getListasReproduccion();

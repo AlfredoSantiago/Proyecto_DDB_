@@ -1,0 +1,234 @@
+package paquete;
+
+import db.dao.*;
+import db.entity.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ *
+ * @author Alfredo
+ */
+public class Fragmentacion extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String opcion = request.getParameter("op");
+        //HttpSession session = request.getSession();
+        int op = Integer.parseInt(opcion);
+        int relacion;
+        String atributo, operador, valor;
+        String atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2;
+        int respuesta = 0;
+        switch (op) {
+            //comprobacion predicados simples
+            case 1:
+                relacion = Integer.parseInt(request.getParameter("relacion"));
+                atributo = request.getParameter("atributo");
+                operador = request.getParameter("operador");
+                valor = request.getParameter("valor");
+                try {
+                    respuesta = comprobarPredicadosSimples(relacion, atributo, operador, valor);
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Fragmentacion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                out.print(respuesta);
+                return;
+            case 2:
+                relacion = Integer.parseInt(request.getParameter("relacion"));
+                atributo_1 = request.getParameter("atributo_1");
+                operador_1 = request.getParameter("operador_1");
+                valor_1 = request.getParameter("valor_1");
+                atributo_2 = request.getParameter("atributo_1");
+                operador_2 = request.getParameter("operador_2");
+                valor_2 = request.getParameter("valor_2");
+                try {
+                    respuesta = comprobarPredicadosMiniterminos(relacion, atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Fragmentacion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                out.print(respuesta);
+                return;
+            case 3:
+                relacion = Integer.parseInt(request.getParameter("relacion"));
+                atributo_1 = request.getParameter("atributo_1");
+                operador_1 = request.getParameter("operador_1");
+                valor_1 = request.getParameter("valor_1");
+                atributo_2 = request.getParameter("atributo_1");
+                operador_2 = request.getParameter("operador_2");
+                valor_2 = request.getParameter("valor_2");
+                String sitio = request.getParameter("sitio");
+                String nombreBase = request.getParameter("nombreBase");
+                try {
+                    guardarPredicadosMiniterminos(relacion, atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2, sitio, nombreBase);
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Fragmentacion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return;
+            //comprobacion predicados miniterminos
+
+        }
+
+    }
+
+    public int comprobarPredicadosSimples(int relacion, String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        AdministradorDAO adao = new AdministradorDAO();
+        ArtistaDAO ardao = new ArtistaDAO();
+        CancionArtistaDAO cadao = new CancionArtistaDAO();
+        CancionDAO cdao = new CancionDAO();
+        CancionListaDAO cldao = new CancionListaDAO();
+        DatosPagoDAO dpdao = new DatosPagoDAO();
+        ListaReproduccionDAO lrdao = new ListaReproduccionDAO();
+        UsuarioDAO udao = new UsuarioDAO();
+        int num = 0;
+        switch (relacion) {
+            case 1:
+                num = adao.count(atributo, operador, valor);
+                break;
+            case 2:
+                num = ardao.count(atributo, operador, valor);
+                break;
+            case 3:
+                num = cdao.count(atributo, operador, valor);
+                break;
+            case 4:
+                num = cadao.count(atributo, operador, valor);
+                break;
+            case 5:
+                num = dpdao.count(atributo, operador, valor);
+                break;
+            case 6:
+                num = lrdao.count(atributo, operador, valor);
+                break;
+            case 7:
+                num = udao.count(atributo, operador, valor);
+                break;
+            case 8:
+                num = cldao.count(atributo, operador, valor);
+                break;
+        }
+        if (num > 0) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public int comprobarPredicadosMiniterminos(int relacion, String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        AdministradorDAO adao = new AdministradorDAO();
+        ArtistaDAO ardao = new ArtistaDAO();
+        CancionArtistaDAO cadao = new CancionArtistaDAO();
+        CancionDAO cdao = new CancionDAO();
+        CancionListaDAO cldao = new CancionListaDAO();
+        DatosPagoDAO dpdao = new DatosPagoDAO();
+        ListaReproduccionDAO lrdao = new ListaReproduccionDAO();
+        UsuarioDAO udao = new UsuarioDAO();
+        int num = 0;
+        switch (relacion) {
+            case 1:
+                num = adao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+            case 2:
+                num = ardao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+            case 3:
+                num = cdao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+            case 4:
+                num = cadao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+            case 5:
+                num = dpdao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+            case 6:
+                num = lrdao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+            case 7:
+                num = udao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+            case 8:
+                num = cldao.count2(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                break;
+        }
+        if (num > 0) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public void guardarPredicadosMiniterminos(int relacion, String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2, String sitio, String nombreBase) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        AdministradorDAO adao = new AdministradorDAO();
+        ArtistaDAO ardao = new ArtistaDAO();
+        CancionArtistaDAO cadao = new CancionArtistaDAO();
+        CancionDAO cdao = new CancionDAO();
+        CancionListaDAO cldao = new CancionListaDAO();
+        DatosPagoDAO dpdao = new DatosPagoDAO();
+        ListaReproduccionDAO lrdao = new ListaReproduccionDAO();
+        UsuarioDAO udao = new UsuarioDAO();
+        
+        //int num = 0;
+        switch (relacion) {
+            case 1:
+                List<Administrador> admins = adao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                for(int i=0; i<admins.size(); i++){
+                    adao.agregarAdministradorSitio(admins.get(i), sitio, nombreBase);
+                }
+                break;
+            case 2:
+                List<Artista> artists = ardao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                for(int i=0; i<artists.size(); i++){
+                    ardao.agregarArtistaSitio(artists.get(i), sitio, nombreBase);
+                }
+                break;
+            case 3:
+                List<Cancion> canciones = cdao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                for(int i=0; i<canciones.size(); i++){
+                    cdao.agregarCancionSitio(canciones.get(i), sitio, nombreBase);
+                }
+                break;
+            case 4:
+                List<CancionArtista> cas = cadao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);;
+                for(int i=0; i<cas.size(); i++){
+                    cadao.agregarCancionArtistaSitio(cas.get(i), sitio, nombreBase);
+                }
+                break;
+            case 5:
+                List<DatosPago> dps  = dpdao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                for(int i=0; i<dps.size(); i++){
+                    dpdao.agregarDatosPagoSitio(dps.get(i), sitio, nombreBase);
+                }
+                break;
+            case 6:
+                List<ListaReproduccion> lrs = lrdao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                for(int i=0; i<lrs.size(); i++){
+                    lrdao.agregarListaDeReprodccionSitio(lrs.get(i), sitio, nombreBase);
+                }
+                break;
+            case 7:
+                List<Usuario> us = udao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                for(int i=0; i<us.size(); i++){
+                    udao.agregarUsuarioSitio(us.get(i), sitio, nombreBase);
+                }
+                break;
+            case 8:
+                List<CancionLista> cls = cldao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
+                for(int i=0; i<cls.size(); i++){
+                    cldao.agregarCancionEnListaSitio(cls.get(i), sitio, nombreBase);
+                }
+                break;
+        }
+
+    }
+
+}
