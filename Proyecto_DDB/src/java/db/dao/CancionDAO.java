@@ -218,7 +218,6 @@ public class CancionDAO {
         PreparedStatement pS;
         conector.setBd(nombreBase);
         conector.setUrl(sitio);
-        conector.setBd("proyecto_DDB");
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
