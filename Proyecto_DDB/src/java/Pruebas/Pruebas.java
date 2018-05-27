@@ -38,8 +38,10 @@ import org.jaudiotagger.tag.id3.ID3v11Tag;*/
 public class Pruebas {
     public static void main(String []args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, ParseException, FileNotFoundException, IOException{
         AdministradorDAO adao = new AdministradorDAO();
-        int i =adao.count("idAdministrador", ">", "1000");
-        System.out.println("i: "+i);
+        //int i =adao.count("idAdministrador", ">", "1000");
+        //System.out.println("i: "+i);
+        int res = adao.count2("idAdministrador", "<", "12", "idUsuario", ">", "45");
+        System.out.println("num: "+res);
         /* File archivo = new File ("Listas.txt"); //nombre del archivo donde se guardan los nombres
         FileReader fr = new FileReader (archivo);
         BufferedReader br = new BufferedReader(fr);

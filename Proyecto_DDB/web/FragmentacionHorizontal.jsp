@@ -249,28 +249,231 @@
                             </div>
                         </div>
                         <script>
-                            pad = 1, par = 1, pc = 1, pca = 1, pcl = 1, pdp = 1, plr = 1, pu = 1;                               
-                            predicadosS = [];  
-                            color;
-                            function agregar(){
-                                //alert('Agregar');
+
+                            pad = 1, par = 1, pc = 1, pca = 1, pcl = 1, pdp = 1, plr = 1, pu = 1;
+                            mad = 1, mar = 1, mc = 1, mca = 1, mcl = 1, mdp = 1, mlr = 1, mu = 1;
+                            predicadosS = [];
+                            predicados_1 = "";
+                            predicados_2 = "";
+                            color = "";
+                            predicadosM = [];
+                            minitermino_m = "";
+                            function generarFM() {
+                                var predicado_1 = obtenerPredicado(predicados_1);
+                                var predicado_2 = obtenerPredicado(predicados_2);
+                                document.getElementById(predicados_1).style.backgroundColor = "#FFFFFF";
+                                document.getElementById(predicados_2).style.backgroundColor = "#FFFFFF";
+                                predicados_1 = "";
+                                predicados_2 = "";
+                                alert("recupero predicados");
+                                var relacion = predicado_1.relacion, atributo_1 = predicado_1.atributo, operador_1 = predicado_1.operador, valor_1 = predicado_1.valor, atributo_2 = predicado_2.atributo, operador_2 = predicado_2.operador, valor_2 = predicado_2.valor;
+                                $.post("Fragmentacion?op=2&relacion=" + relacion + "&atributo_1=" + atributo_1 + "&operador_1=" + operador_1 + "&valor_1=" + valor_1 + "&atributo_2=" + atributo_2 + "&operador_2=" + operador_2 + "&valor_2=" + valor_2, function (data, status) {
+                                    alert("respuesta del servidor: " + data);
+                                    if (data === "1") {
+                                        alert("pues es 1");
+                                        var num = actualizarMiniterminos(relacion);
+                                        var id = "m"+relacion + "" + num;
+                                        var mini = {relacion:relacion, id: id, atributo_1: atributo_1, operador_1: operador_1, valor_1: valor_1, atributo_2: atributo_2, operador_2: operador_2, valor_2: valor_2};
+                                        predicadosM.push(mini);
+                                        var v = "<div id='" + id + "' style='color:" + color + ";' onclick = 'seleccionarMinitermino(" + relacion + ", " + num + ")'>m" + num + ": (" + atributo_1 + " " + operador_1 + " " + valor_1 + ") ^ (" + atributo_2 + " " + operador_2 + " " + valor_2 + ")</div>";
+                                        $("#fragmentos").append(v);
+                                        
+                                    }
+                                });
+                                var operador_1_n = obtenerNegacionOperador(operador_1); 
+                                $.post("Fragmentacion?op=2&relacion=" + relacion + "&atributo_1=" + atributo_1 + "&operador_1=" + operador_1_n + "&valor_1=" + valor_1 + "&atributo_2=" + atributo_2 + "&operador_2=" + operador_2 + "&valor_2=" + valor_2, function (data, status) {
+                                    alert("respuesta del servidor: " + data);
+                                    if (data === "1") {
+                                        alert("pues es 1");
+                                        var num = actualizarMiniterminos(relacion);
+                                        var id = "m"+relacion + "" + num;
+                                        var mini = {relacion:relacion, id: id, atributo_1: atributo_1, operador_1: operador_1_n, valor_1: valor_1, atributo_2: atributo_2, operador_2: operador_2, valor_2: valor_2};
+                                        predicadosM.push(mini);
+                                        var v = "<div id='" + id + "' style='color:" + color + ";' onclick = 'seleccionarMinitermino(" + relacion + ", " + num + ")'>m" + num + ": ~(" + atributo_1 + " " + operador_1 + " " + valor_1 + ") ^ (" + atributo_2 + " " + operador_2 + " " + valor_2 + ")</div>";
+                                        $("#fragmentos").append(v);
+                                        
+                                    }
+                                });
+                                var operador_2_n = obtenerNegacionOperador(operador_2);
+                                $.post("Fragmentacion?op=2&relacion=" + relacion + "&atributo_1=" + atributo_1 + "&operador_1=" + operador_1 + "&valor_1=" + valor_1 + "&atributo_2=" + atributo_2 + "&operador_2=" + operador_2_n + "&valor_2=" + valor_2, function (data, status) {
+                                    alert("respuesta del servidor: " + data);
+                                    if (data === "1") {
+                                        alert("pues es 1");
+                                        var num = actualizarMiniterminos(relacion);
+                                        var id = "m"+relacion + "" + num;
+                                        var mini = {relacion:relacion, id: id, atributo_1: atributo_1, operador_1: operador_1, valor_1: valor_1, atributo_2: atributo_2, operador_2: operador_2_n, valor_2: valor_2};
+                                        predicadosM.push(mini);
+                                        var v = "<div id='" + id + "' style='color:" + color + ";' onclick = 'seleccionarMinitermino(" + relacion + ", " + num + ")'>m" + num + ": (" + atributo_1 + " " + operador_1 + " " + valor_1 + ") ^ ~(" + atributo_2 + " " + operador_2 + " " + valor_2 + ")</div>";
+                                        $("#fragmentos").append(v);
+                                        
+                                    }
+                                });
+                                
+                                $.post("Fragmentacion?op=2&relacion=" + relacion + "&atributo_1=" + atributo_1 + "&operador_1=" + operador_1_n + "&valor_1=" + valor_1 + "&atributo_2=" + atributo_2 + "&operador_2=" + operador_2_n + "&valor_2=" + valor_2, function (data, status) {
+                                    alert("respuesta del servidor: " + data);
+                                    if (data === "1") {
+                                        alert("pues es 1");
+                                        var num = actualizarMiniterminos(relacion);
+                                        var id = "m"+relacion + "" + num;
+                                        var mini = {relacion:relacion, id: id, atributo_1: atributo_1, operador_1: operador_1_n, valor_1: valor_1, atributo_2: atributo_2, operador_2: operador_2_n, valor_2: valor_2};
+                                        predicadosM.push(mini);
+                                        var v = "<div id='" + id + "' style='color:" + color + ";' onclick = 'seleccionarMinitermino(" + relacion + ", " + num + ")'>m" + num + ": ~(" + atributo_1 + " " + operador_1 + " " + valor_1 + ") ^ ~(" + atributo_2 + " " + operador_2 + " " + valor_2 + ")</div>";
+                                        $("#fragmentos").append(v);
+                                    }
+                                });
+                                    
+                            }
+                            function seleccionarMinitermino(relacion, num) {
+                                alert("minitermino seleccionado");
+                                var id = "m"+relacion + "" + num;
+                                alert(id);
+                                if (minitermino_m === id) {
+                                    minitermino_m = "";
+                                    document.getElementById(id).style.backgroundColor = "#FFFFFF";
+                                } else {
+                                    alert("sin seleccionar");
+                                    minitermino_m = id;
+                                    document.getElementById(id).style.backgroundColor = "#A9BCF5";
+                                }
+
+                            }
+                            function buscarMinitermino(id) {
+                                var tam = predicadosM.length;
+                                for (var i = 0; i < tam; i++) {
+                                    console.log(i + " " + predicadosM[i].id + " " + id);
+                                    if (predicadosM[i].id === id) {
+                                        return predicadosM[i];
+                                    }
+                                }
+                            }
+                            /*function verificarPredicado(relacion, atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2) {
+                                
+
+                            }*/
+                            function obtenerNegacionOperador(operador) {
+                                switch (operador) {
+                                    case '>':
+                                        return '<=';
+                                    case '<':
+                                        return '>=';
+                                    case '<=':
+                                        return '>';
+                                    case '>=':
+                                        return '<';
+                                    case '=':
+                                        return '<>';
+                                    case'<>':
+                                        return '=';
+
+                                }
+                            }
+                            function agregar() {
                                 var relacion = document.getElementById("sell").value;
                                 var atributo = document.getElementById("attr").value;
                                 var operador = document.getElementById("operador").value;
                                 var valor = document.getElementById("valor").value;
+                                $.post("Fragmentacion?op=1&relacion=" + relacion + "&atributo=" + atributo + "&operador=" + operador + "&valor=" + valor, function (data, status) {
+                                    //alert("respuesta: "+data);
+                                    if (data === "1") {
+                                        var i = actualizar(relacion);
+                                        var predicadoS = {id: relacion + "" + i, relacion: relacion, atributo: atributo, operador: operador, valor: valor};
+                                        predicadosS.push(predicadoS);
+                                        //alert(color);
+                                        var v = "<div id='" + relacion + "" + i + "' style='color:" + color + ";' onclick = 'seleccionar(" + relacion + ", " + i + ")'>p" + i + ": " + atributo + " " + operador + " " + valor + "</div>";
+                                        $("#predicados").append(v);
+                                    } else {
+                                        alert('El predicado no corresponde a ninguna tupla');
+                                    }
+                                });
                                 //alert(relacion+" "+atributo+" "+operador+" "+valor);
-                                var predicadoS = {relacion: relacion, atributo: atributo, operador: operador, valor:valor};
-                                predicadosS.push(predicadoS);
-                                var i = actualizar(relacion);
-                                //alert(color);
-                                var v = "<div style='color:"+color+";'>p"+i+": "+atributo+" "+operador+" "+valor+"</div>";
-                                $("#predicados").append(v);
+
                                 //document.getElementById("ps") = v +  
-                                
+
                             }
-                            function actualizar(relacion){
-                                var v ; 
-                                switch(relacion){
+                            function seleccionar(relacion, i) {
+                                //alert('seleccionar');
+                                var id = relacion + "" + i;
+                                //var predicado = obtenerPredicado(id);
+                                if (predicados_1 === id || predicados_2 === id) {
+                                    if (predicados_1 === id) {
+                                        predicados_1 = "";
+                                    } else {
+                                        predicados_2 = "";
+                                    }
+                                    document.getElementById(id).style.backgroundColor = "#FFFFFF";
+                                } else {
+                                    if (predicados_1 === "") {
+                                        predicados_1 = id;
+                                    } else {
+                                        predicados_2 = id;
+                                    }
+                                    document.getElementById(id).style.backgroundColor = "#A9BCF5";
+                                }
+                                //var predicado = {id:id, relacion: relacion, atributo: atributo, operador: operador, valor:valor};
+                                //predicadosN.push(predicado);
+
+                            }
+                            function obtenerPredicado(id) {
+                                var tam = predicadosS.length;
+                                for (var i = 0; i < tam; i++) {
+                                    console.log(i + " " + predicadosS[i].id + " " + id);
+                                    if (predicadosS[i].id === id) {
+                                        return predicadosS[i];
+                                    }
+                                }
+                            }
+                            function actualizarMiniterminos(relacion) {
+                                var v;
+                                switch (relacion) {
+                                    case "1":
+                                        v = mad;
+                                        mad++;
+                                        color = "#0101DF";
+                                        break;
+                                    case "2":
+                                        v = mar;
+                                        mar++;
+                                        color = "#FF0000";
+                                        break;
+                                    case "3":
+                                        v = mc;
+                                        mc++;
+                                        color = "#DF7401";
+                                        break;
+                                    case "4":
+                                        v = mca;
+                                        mca++;
+                                        color = "#04B404";
+                                        break;
+                                    case "5":
+                                        v = mcl;
+                                        mcl++;
+                                        color = "#00FFFF";
+                                        break;
+                                    case "6":
+                                        v = mdp;
+                                        mdp++;
+                                        color = "#FF00FF";
+                                        break;
+                                    case "7":
+                                        v = mlr;
+                                        mlr++;
+                                        color = "#6E6E6E";
+                                        break;
+                                    case "8":
+                                        v = mu;
+                                        mu++;
+                                        color = "#000000";
+                                        break;
+
+                                }
+                                return v;
+                            }
+                            ;
+
+                            function actualizar(relacion) {
+                                var v;
+                                switch (relacion) {
                                     case "1":
                                         v = pad;
                                         pad++;
@@ -311,10 +514,28 @@
                                         pu++;
                                         color = "#000000";
                                         break;
-                                      
+
                                 }
                                 return v;
-                            };
+                            }
+                            function enviar(){
+                                var sitio = document.getElementById("sitio").value;
+                                alert("sitio: "+sitio+"  id: "+minitermino_m);
+                                var minitermino = buscarMinitermino(minitermino_m);
+                                alert("relacion=" + minitermino.relacion + "&atributo_1=" + minitermino.atributo_1 + "&operador_1=" + minitermino.operador_1 + "&valor_1=" + minitermino.valor_1 + "&atributo_2=" + minitermino.atributo_2 + "&operador_2=" + minitermino.operador_2 + "&valor_2=" + minitermino.valor_2+"&sitio="+sitio);
+                                $.post("Fragmentacion?op=3&relacion=" + minitermino.relacion + "&atributo_1=" + minitermino.atributo_1 + "&operador_1=" + minitermino.operador_1 + "&valor_1=" + minitermino.valor_1 + "&atributo_2=" + minitermino.atributo_2 + "&operador_2=" + minitermino.operador_2 + "&valor_2=" + minitermino.valor_2+"&sitio="+sitio, function (data, status) {
+                                    alert("respuesta del servidor: " + data);
+                                    if (data === "1") {
+                                        alert("Se envio correctamente al sitio 1");
+                                        /*var num = actualizarMiniterminos(relacion);
+                                        var id = "m"+relacion + "" + num;
+                                        var mini = {id: id, atributo_1: atributo_1, operador_1: operador_1_n, valor_1: valor_1, atributo_2: atributo_2, operador_2: operador_2_n, valor_2: valor_2};
+                                        predicadosM.push(mini);
+                                        var v = "<div id='" + id + "' style='color:" + color + ";' onclick = 'seleccionarMinitermino(" + relacion + ", " + num + ")'>m" + num + ": ~(" + atributo_1 + " " + operador_1 + " " + valor_1 + ") ^ ~(" + atributo_2 + " " + operador_2 + " " + valor_2 + ")</div>";
+                                        $("#fragmentos").append(v);*/
+                                    }
+                                });
+                            }
                         </script>
                         <div class="col-md-6 ">
                             <div class="card">
@@ -331,13 +552,15 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <select class="form-control" id="sel1">
-                                                    <option>Hola</option>
+                                                <select class="form-control" id="sitio">
+                                                    <option value="1">Sitio 1</option>
+                                                    <option value="2">Sitio 2</option>
+                                                    <option value="3">Sitio 3</option>
                                                 </select>
                                             </div>                                             
                                         </div>
                                         <div class="col-md-2">
-                                            <button type="button" class="btn btn-success">Enviar</button>
+                                            <button onclick="enviar()" type="button" class="btn btn-success">Enviar</button>
                                         </div>
                                     </div>
                                 </div>                   

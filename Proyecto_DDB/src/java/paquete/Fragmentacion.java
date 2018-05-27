@@ -51,14 +51,16 @@ public class Fragmentacion extends HttpServlet {
                 atributo_1 = request.getParameter("atributo_1");
                 operador_1 = request.getParameter("operador_1");
                 valor_1 = request.getParameter("valor_1");
-                atributo_2 = request.getParameter("atributo_1");
+                atributo_2 = request.getParameter("atributo_2");
                 operador_2 = request.getParameter("operador_2");
                 valor_2 = request.getParameter("valor_2");
+                System.out.println(relacion+" "+atributo_1+" "+operador_1+" "+valor_1+" "+atributo_2+" "+operador_2+" "+valor_2);
                 try {
                     respuesta = comprobarPredicadosMiniterminos(relacion, atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(Fragmentacion.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                System.out.print("\n\n\nRespuesta: "+respuesta+"\n\n\n\n");
                 out.print(respuesta);
                 return;
             case 3:
@@ -66,16 +68,33 @@ public class Fragmentacion extends HttpServlet {
                 atributo_1 = request.getParameter("atributo_1");
                 operador_1 = request.getParameter("operador_1");
                 valor_1 = request.getParameter("valor_1");
-                atributo_2 = request.getParameter("atributo_1");
+                atributo_2 = request.getParameter("atributo_2");
                 operador_2 = request.getParameter("operador_2");
                 valor_2 = request.getParameter("valor_2");
-                String sitio = request.getParameter("sitio");
-                String nombreBase = request.getParameter("nombreBase");
+                int sitio_n = Integer.parseInt(request.getParameter("sitio"));
+                String sitio="", nombreBase="";
+                System.out.println("Caso 3 relacion: "+relacion+" atributo_1: "+atributo_1+" operador_1: "+operador_1+" valor_1: "+valor_1+" atributo_2: "+atributo_2+" operador_2: "+operador_2+" valor_2: "+valor_2 );
+                switch(sitio_n){
+                    case 1:
+                        sitio = "jdbc:mysql://localhost/";
+                        nombreBase = "proyecto_ddb_1";
+                        break;
+                    case 2:
+                        sitio = "jdbc:mysql://localhost/";
+                        nombreBase = "proyecto_ddb_2";
+                        break;
+                    case 3:
+                        sitio = "jdbc:mysql://localhost/";
+                        nombreBase = "proyecto_ddb_3";
+                        break;
+                }
+                //String nombreBase = request.getParameter("nombreBase");
                 try {
                     guardarPredicadosMiniterminos(relacion, atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2, sitio, nombreBase);
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(Fragmentacion.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                out.print(1);
                 return;
             //comprobacion predicados miniterminos
 
