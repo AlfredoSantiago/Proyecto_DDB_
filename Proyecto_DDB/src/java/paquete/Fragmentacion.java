@@ -72,25 +72,28 @@ public class Fragmentacion extends HttpServlet {
                 operador_2 = request.getParameter("operador_2");
                 valor_2 = request.getParameter("valor_2");
                 int sitio_n = Integer.parseInt(request.getParameter("sitio"));
-                String sitio="", nombreBase="";
+                String sitio="", nombreBase="", contrasenia ="";
                 System.out.println("Caso 3 relacion: "+relacion+" atributo_1: "+atributo_1+" operador_1: "+operador_1+" valor_1: "+valor_1+" atributo_2: "+atributo_2+" operador_2: "+operador_2+" valor_2: "+valor_2 );
                 switch(sitio_n){
                     case 1:
                         sitio = "jdbc:mysql://localhost/";
                         nombreBase = "proyecto_ddb_1";
+                        contrasenia = "root";
                         break;
                     case 2:
-                        sitio = "jdbc:mysql://localhost/";
-                        nombreBase = "proyecto_ddb_2";
+                        sitio = "jdbc:mysql://10.100.76.213/";
+                        nombreBase = "proyDB";
+                        contrasenia = "raizserver@Mario";
                         break;
                     case 3:
-                        sitio = "jdbc:mysql://localhost/";
-                        nombreBase = "proyecto_ddb_3";
+                        sitio = "jdbc:mysql://10.100.74.82/";
+                        nombreBase = "proyecto_ddb";
+                        contrasenia = "brenda2117100296";
                         break;
                 }
                 //String nombreBase = request.getParameter("nombreBase");
                 try {
-                    guardarPredicadosMiniterminos(relacion, atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2, sitio, nombreBase);
+                    guardarPredicadosMiniterminos(relacion, atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2, sitio, nombreBase, contrasenia);
                 } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(Fragmentacion.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -186,7 +189,7 @@ public class Fragmentacion extends HttpServlet {
         return 0;
     }
 
-    public void guardarPredicadosMiniterminos(int relacion, String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2, String sitio, String nombreBase) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void guardarPredicadosMiniterminos(int relacion, String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2, String sitio, String nombreBase, String contrasenia) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         AdministradorDAO adao = new AdministradorDAO();
         ArtistaDAO ardao = new ArtistaDAO();
         CancionArtistaDAO cadao = new CancionArtistaDAO();
@@ -201,49 +204,49 @@ public class Fragmentacion extends HttpServlet {
             case 1:
                 List<Administrador> admins = adao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 for(int i=0; i<admins.size(); i++){
-                    adao.agregarAdministradorSitio(admins.get(i), sitio, nombreBase);
+                    adao.agregarAdministradorSitio(admins.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
             case 2:
                 List<Artista> artists = ardao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 for(int i=0; i<artists.size(); i++){
-                    ardao.agregarArtistaSitio(artists.get(i), sitio, nombreBase);
+                    ardao.agregarArtistaSitio(artists.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
             case 3:
                 List<Cancion> canciones = cdao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 for(int i=0; i<canciones.size(); i++){
-                    cdao.agregarCancionSitio(canciones.get(i), sitio, nombreBase);
+                    cdao.agregarCancionSitio(canciones.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
             case 4:
                 List<CancionArtista> cas = cadao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);;
                 for(int i=0; i<cas.size(); i++){
-                    cadao.agregarCancionArtistaSitio(cas.get(i), sitio, nombreBase);
+                    cadao.agregarCancionArtistaSitio(cas.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
             case 5:
                 List<DatosPago> dps  = dpdao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 for(int i=0; i<dps.size(); i++){
-                    dpdao.agregarDatosPagoSitio(dps.get(i), sitio, nombreBase);
+                    dpdao.agregarDatosPagoSitio(dps.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
             case 6:
                 List<ListaReproduccion> lrs = lrdao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 for(int i=0; i<lrs.size(); i++){
-                    lrdao.agregarListaDeReprodccionSitio(lrs.get(i), sitio, nombreBase);
+                    lrdao.agregarListaDeReprodccionSitio(lrs.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
             case 7:
                 List<Usuario> us = udao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 for(int i=0; i<us.size(); i++){
-                    udao.agregarUsuarioSitio(us.get(i), sitio, nombreBase);
+                    udao.agregarUsuarioSitio(us.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
             case 8:
                 List<CancionLista> cls = cldao.getTuplas(atributo_1, operador_1, valor_1, atributo_2, operador_2, valor_2);
                 for(int i=0; i<cls.size(); i++){
-                    cldao.agregarCancionEnListaSitio(cls.get(i), sitio, nombreBase);
+                    cldao.agregarCancionEnListaSitio(cls.get(i), sitio, nombreBase, contrasenia);
                 }
                 break;
         }

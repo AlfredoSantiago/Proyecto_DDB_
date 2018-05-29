@@ -168,12 +168,13 @@ public class DatosPagoDAO {
         return lista;
     }
     
-    public void agregarDatosPagoSitio(DatosPago dp, String sitio, String nombreBase) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void agregarDatosPagoSitio(DatosPago dp, String sitio, String nombreBase, String contrasenia) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
         String query = "insert into datospago values(?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pS;
         conector.setBd(nombreBase);
         conector.setUrl(sitio);
+        conector.setPassword(contrasenia);
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);

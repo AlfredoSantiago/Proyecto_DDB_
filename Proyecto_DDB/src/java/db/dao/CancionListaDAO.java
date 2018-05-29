@@ -181,12 +181,13 @@ public class CancionListaDAO {
         return lista;
     }
     
-    public void agregarCancionEnListaSitio(CancionLista c, String sitio, String nombreBase) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void agregarCancionEnListaSitio(CancionLista c, String sitio, String nombreBase, String contrasenia) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
         String query = "insert into cancion_lista values(?,?)";
         PreparedStatement pS;
         conector.setBd(nombreBase);
         conector.setUrl(sitio);
+        conector.setPassword(contrasenia);
         conector.abrirConexion();
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);

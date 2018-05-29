@@ -172,13 +172,14 @@ public class ArtistaDAO {
         return lista;
     }
     
-    public void agregarArtistaSitio(Artista a, String sitio, String nombreBase) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void agregarArtistaSitio(Artista a, String sitio, String nombreBase, String contrasenia) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
         String query = "insert into Artista values(?,?,?)";
         PreparedStatement pS;
         conector.setBd(nombreBase);
         conector.setUrl(sitio);
         conector.abrirConexion();
+        conector.setPassword(contrasenia);
         pS = conector.getConect().prepareStatement(query);
         conector.getConect().setAutoCommit(false);
         pS.setInt(1, a.getIdArtista());
