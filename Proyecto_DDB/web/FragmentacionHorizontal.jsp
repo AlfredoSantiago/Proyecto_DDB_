@@ -35,10 +35,10 @@
                 <div class="col-md-10 color-cafe-fondo">
                     <ul class="nav justify-content-center margen">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Fragmentación Horizontal</a>
+                            <a class="nav-link active" href="FragmentacionHorizontal.jsp">Fragmentación Horizontal</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Fragmentación Vertical</a>
+                            <a class="nav-link disabled" href="FragmentacionVertical.jsp">Fragmentación Vertical</a>
                         </li>
                     </ul>                        
                     <div class="row">
@@ -368,10 +368,13 @@
                                 }
                             }
                             function agregar() {
+                                
                                 var relacion = document.getElementById("sell").value;
                                 var atributo = document.getElementById("attr").value;
                                 var operador = document.getElementById("operador").value;
                                 var valor = document.getElementById("valor").value;
+                                
+                                alert("respuesta: "+atributo);
                                 $.post("Fragmentacion?op=1&relacion=" + relacion + "&atributo=" + atributo + "&operador=" + operador + "&valor=" + valor, function (data, status) {
                                     //alert("respuesta: "+data);
                                     if (data === "1") {
@@ -527,12 +530,6 @@
                                     alert("respuesta del servidor: " + data);
                                     if (data === "1") {
                                         alert("Se envio correctamente al sitio 1");
-                                        /*var num = actualizarMiniterminos(relacion);
-                                        var id = "m"+relacion + "" + num;
-                                        var mini = {id: id, atributo_1: atributo_1, operador_1: operador_1_n, valor_1: valor_1, atributo_2: atributo_2, operador_2: operador_2_n, valor_2: valor_2};
-                                        predicadosM.push(mini);
-                                        var v = "<div id='" + id + "' style='color:" + color + ";' onclick = 'seleccionarMinitermino(" + relacion + ", " + num + ")'>m" + num + ": ~(" + atributo_1 + " " + operador_1 + " " + valor_1 + ") ^ ~(" + atributo_2 + " " + operador_2 + " " + valor_2 + ")</div>";
-                                        $("#fragmentos").append(v);*/
                                     }
                                 });
                             }
