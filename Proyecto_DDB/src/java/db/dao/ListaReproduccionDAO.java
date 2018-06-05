@@ -97,7 +97,7 @@ public class ListaReproduccionDAO {
     
     public List<ListaReproduccion> getListasReproduccion() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM Lista_de_Reproduccion ORDER BY idLista";
+        String query = "SELECT * FROM lista_de_reproduccion ORDER BY idLista";
         PreparedStatement pS;
         ResultSet rS;
 
@@ -119,7 +119,7 @@ public class ListaReproduccionDAO {
     
     public int count(String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Lista_de_Reproduccion where "+atributo+" "+operador+" "+valor+"";
+        String query = "select count(*) from lista_de_reproduccion where "+atributo+" "+operador+" "+valor+"";
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;

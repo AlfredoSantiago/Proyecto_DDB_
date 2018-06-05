@@ -84,7 +84,7 @@ public class UsuarioDAO {
     
     public List<Usuario> getUsuarios() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM Usuario ORDER BY nombre";
+        String query = "SELECT * FROM usuario ORDER BY nombre";
         PreparedStatement pS;
         ResultSet rS;
 
@@ -106,7 +106,7 @@ public class UsuarioDAO {
     
     public int count(String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Usuario where "+atributo+" "+operador+" "+valor+"";
+        String query = "select count(*) from usuario where "+atributo+" "+operador+" "+valor+"";
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
@@ -146,7 +146,7 @@ public class UsuarioDAO {
     
     public List<Usuario> getTuplas(String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM Usuario where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
+        String query = "SELECT * FROM usuario where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
         PreparedStatement pS;
         ResultSet rS;
 

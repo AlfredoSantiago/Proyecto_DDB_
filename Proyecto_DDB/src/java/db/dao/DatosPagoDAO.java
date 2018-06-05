@@ -36,7 +36,7 @@ public class DatosPagoDAO {
     
     public DatosPago buscardatosPago(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from DatosPago where idDatos = ?";
+        String query = "select * from datospago where idDatos = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -86,7 +86,7 @@ public class DatosPagoDAO {
     
     public List<DatosPago> getDatosPagos() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM DatosPago ORDER BY idDatos";
+        String query = "SELECT * FROM datospago ORDER BY idDatos";
         PreparedStatement pS;
         ResultSet rS;
 
@@ -108,7 +108,7 @@ public class DatosPagoDAO {
     
     public int count(String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from DatosPago where "+atributo+" "+operador+" "+valor+"";
+        String query = "select count(*) from datospago where "+atributo+" "+operador+" "+valor+"";
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;

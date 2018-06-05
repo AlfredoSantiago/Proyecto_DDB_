@@ -14,7 +14,7 @@ public class AdministradorDAO {
     
     public void agregarAdministrador(Administrador a) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into Administrador values(?,?,?)";
+        String query = "insert into administrador values(?,?,?)";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -30,7 +30,7 @@ public class AdministradorDAO {
     
     public Administrador buscarAdministrador(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from Administrador where idAdministrador = ?";
+        String query = "select * from administrador where idAdministrador = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -47,7 +47,7 @@ public class AdministradorDAO {
     
     public Administrador buscarAdministradorDeUsuario(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from Administrador where idUsuario = ?";
+        String query = "select * from administrador where idUsuario = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -64,7 +64,7 @@ public class AdministradorDAO {
     
     public void eliminarAdministrador(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "delete from Administrador where idUsuario=?";
+        String query = "delete from administrador where idUsuario=?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -93,7 +93,7 @@ public class AdministradorDAO {
     
     public List<Administrador> getAdministradores() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
+        String query = "SELECT * FROM administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
 
@@ -115,7 +115,7 @@ public class AdministradorDAO {
     
     public int count(String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Administrador where "+atributo+" "+operador+" "+valor+"";
+        String query = "select count(*) from administrador where "+atributo+" "+operador+" "+valor+"";
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
@@ -135,7 +135,7 @@ public class AdministradorDAO {
     
     public int count2(String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Administrador where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
+        String query = "select count(*) from administrador where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
@@ -155,7 +155,7 @@ public class AdministradorDAO {
     
     public List<Administrador> getTuplas(String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "SELECT * FROM Administrador where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
+        String query = "SELECT * FROM administrador where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
         PreparedStatement pS;
         ResultSet rS;
 
@@ -177,7 +177,7 @@ public class AdministradorDAO {
     
     public void agregarAdministradorSitio(Administrador a, String sitio, String nombreBase, String contrasenia) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into Administrador values(?,?,?)";
+        String query = "insert into administrador values(?,?,?)";
         PreparedStatement pS;
         conector.setBd(nombreBase);
         conector.setUrl(sitio);

@@ -122,7 +122,7 @@ public class CancionArtistaDAO {
     }
     public int count(String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Cancion_Artista where "+atributo+" "+operador+" "+valor+"";
+        String query = "select count(*) from cancion_artista where "+atributo+" "+operador+" "+valor+"";
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;

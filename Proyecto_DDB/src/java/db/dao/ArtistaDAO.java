@@ -13,7 +13,7 @@ public class ArtistaDAO {
     
     public void agregarArtista(Artista a) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into Artista values(?,?,?)";
+        String query = "insert into artista values(?,?,?)";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -30,7 +30,7 @@ public class ArtistaDAO {
     
     public Artista buscarArtista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from Artista where idArtista = ?";
+        String query = "select * from artista where idArtista = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -47,7 +47,7 @@ public class ArtistaDAO {
     
     public Artista getArtista_Usuario(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from Artista where idUsuario = ?";
+        String query = "select * from artista where idUsuario = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -64,7 +64,7 @@ public class ArtistaDAO {
     
     public void eliminarArtista(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "delete from Artista where idArtista=?";
+        String query = "delete from artista where idArtista=?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -78,7 +78,7 @@ public class ArtistaDAO {
     
     public void actualizarArtista(Artista c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector = new Conexion();
-        String query = "UPDATE Artista SET descripcion = ? where idArtista=?";
+        String query = "UPDATE artista SET descripcion = ? where idArtista=?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -113,7 +113,7 @@ public class ArtistaDAO {
     }
     public int count(String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Artista where "+atributo+" "+operador+" "+valor+"";
+        String query = "select count(*) from artista where "+atributo+" "+operador+" "+valor+"";
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
@@ -132,7 +132,7 @@ public class ArtistaDAO {
     }
     public int count2(String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Artista where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
+        String query = "select count(*) from artista where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
@@ -174,7 +174,7 @@ public class ArtistaDAO {
     
     public void agregarArtistaSitio(Artista a, String sitio, String nombreBase, String contrasenia) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into Artista values(?,?,?)";
+        String query = "insert into artista values(?,?,?)";
         PreparedStatement pS;
         conector.setBd(nombreBase);
         conector.setUrl(sitio);

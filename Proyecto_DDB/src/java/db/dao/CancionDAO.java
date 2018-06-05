@@ -33,7 +33,7 @@ public class CancionDAO {
     
     public List<Cancion> buscarCancion(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from Cancion where idCancion = ?";
+        String query = "select * from cancion where idCancion = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -51,7 +51,7 @@ public class CancionDAO {
     }
      public Cancion buscarCancion1(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "select * from Cancion where idCancion = ?";
+        String query = "select * from cancion where idCancion = ?";
         PreparedStatement pS;
         ResultSet rS;
         conector.setBd("proyecto_DDB");
@@ -68,7 +68,7 @@ public class CancionDAO {
     }
     public void eliminarCancion(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "delete from Cancion where idCancion=?";
+        String query = "delete from cancion where idCancion=?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -82,7 +82,7 @@ public class CancionDAO {
     
     public void actualizarCancion(Cancion c) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector = new Conexion();
-        String query = "UPDATE Cancion SET nombre = ?, album = ?, genero = ?, anio=?   WHERE idcancion = ?";
+        String query = "UPDATE cancion SET nombre = ?, album = ?, genero = ?, anio=?   WHERE idcancion = ?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -99,7 +99,7 @@ public class CancionDAO {
 
     public void incrementarReproducciones(int id, int n) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector = new Conexion();
-        String query = "UPDATE Cancion SET no_reproducciones = ?   WHERE idcancion = ?";
+        String query = "UPDATE cancion SET no_reproducciones = ?   WHERE idcancion = ?";
         PreparedStatement pS;
         conector.setBd("proyecto_DDB");
         conector.abrirConexion();
@@ -152,7 +152,7 @@ public class CancionDAO {
     
     public int count(String atributo, String operador, String valor) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Cancion where "+atributo+" "+operador+" "+valor+"";
+        String query = "select count(*) from cancion where "+atributo+" "+operador+" "+valor+"";
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
@@ -172,7 +172,7 @@ public class CancionDAO {
     
     public int count2(String atributo_1, String operador_1, String valor_1, String atributo_2, String operador_2, String valor_2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Conexion conector = new Conexion();
-        String query = "select count(*) from Cancion where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
+        String query = "select count(*) from cancion where "+atributo_1+" "+operador_1+" "+valor_1+" and "+atributo_2+" "+operador_2+" "+valor_2;
         //String query = "SELECT * FROM Administrador ORDER BY idAdministrador";
         PreparedStatement pS;
         ResultSet rS;
@@ -214,7 +214,7 @@ public class CancionDAO {
     
     public void agregarCancionSitio(Cancion c, String sitio, String nombreBase, String contrasenia) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         Conexion conector  = new Conexion();
-        String query = "insert into Cancion values(?,?,?,?,?,?)";
+        String query = "insert into cancion values(?,?,?,?,?,?)";
         PreparedStatement pS;
         conector.setBd(nombreBase);
         conector.setUrl(sitio);
