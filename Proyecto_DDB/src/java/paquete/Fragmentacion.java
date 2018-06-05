@@ -99,7 +99,39 @@ public class Fragmentacion extends HttpServlet {
                 }
                 out.print(1);
                 return;
+                
             //comprobacion predicados miniterminos
+            //insercion del la fragmentacion vertical
+            case 4:
+                atributo_1 = request.getParameter("predicado");
+                int sitio_n2 = Integer.parseInt(request.getParameter("sitio"));
+                String sitio2="", nombreBase2="", contrasenia2 ="";
+                System.out.println("Caso 4 predicado: "+atributo_1);
+                switch(sitio_n2){
+                    case 1:
+                        sitio2 = "jdbc:mysql://localhost/";
+                        nombreBase2 = "proyecto_ddb_1";
+                        contrasenia2 = "root";
+                        break;
+                    case 2:
+                        sitio2 = "jdbc:mysql://10.100.76.213/";
+                        nombreBase2 = "proyDB";
+                        contrasenia2 = "raizserver@Mario";
+                        break;
+                    case 3:
+                        sitio2 = "jdbc:mysql://10.100.74.82/";
+                        nombreBase2 = "proyecto_ddb";
+                        contrasenia2 = "brenda2117100296";
+                        break;
+                }
+                //String nombreBase = request.getParameter("nombreBase");
+                try {
+                    guardarPredicadosMiniterminos2(atributo_1,sitio2, nombreBase2, contrasenia2);
+                } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                    Logger.getLogger(Fragmentacion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                out.print(1);
+                return;
 
         }
 
@@ -252,5 +284,10 @@ public class Fragmentacion extends HttpServlet {
         }
 
     }
+    public void guardarPredicadosMiniterminos2(String atributo_1, String sitio_n2, String nombreBase2, String contrasenia2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
+        
+        
 
+    }
 }

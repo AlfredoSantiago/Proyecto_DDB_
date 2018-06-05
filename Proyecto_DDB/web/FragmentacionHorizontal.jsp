@@ -259,8 +259,13 @@
                             predicadosM = [];
                             minitermino_m = "";
                             function generarFM() {
+                                alert(predicados_1);
+                                alert(predicados_2);
                                 var predicado_1 = obtenerPredicado(predicados_1);
                                 var predicado_2 = obtenerPredicado(predicados_2);
+                                
+                                alert(predicado_1.atributo);
+                                alert(predicado_2.atributo);
                                 document.getElementById(predicados_1).style.backgroundColor = "#FFFFFF";
                                 document.getElementById(predicados_2).style.backgroundColor = "#FFFFFF";
                                 predicados_1 = "";

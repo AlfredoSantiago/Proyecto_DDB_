@@ -183,10 +183,10 @@
                                     Expresiones Algebraicas..
                                 </div>                            
                                 <div class="card-body">
-                                    <div class="border border-dark secondary rounded" id="predicados" style="width: 400px; height: 125px; overflow: auto;">
-                                    </div>
-                                    <!--<textarea class="form-control margen-10" rows="3"></textarea>-->
-                                    <br><button onclick="generarFM()" type="button" class="btn btn-success">Generar FM</button>
+                                        <ul class="list-group" id="predicados">
+                                            
+                                            
+                                        </ul>
                                 </div>                   
                             </div>
                         </div>
@@ -230,12 +230,11 @@
                             minitermino_m = "";
                             checks = [];  
                             total=0;
-                            var checkedValue;                             
+                                                        
                             function agregar() {                                          
-                             
+                             var checkedValue; 
                                 var inputElements = document.getElementsByClassName('attr');
                                 var relacion = document.getElementById("sell").value;
-                                alert(relacion);
                                 for(var i=0; inputElements[i]; ++i){
                                       if(inputElements[i].checked=== true){
                                           if(i===0){
@@ -247,39 +246,40 @@
                                       }
                                 }
                                 total+=1;
-                                var v = "<div id='" + relacion + "" + i + "' style='color:" + color + ";' onclick = 'seleccionar(" + relacion + ", " + i +")'>p" + total + ": " + checkedValue.toString() + "</div>";
-                                        $("#predicados").append(v);
+                               var v = "<li id="+ total +"1"+ " class='list-group-item' value="+ checkedValue+" style='color:" + color + ";' onclick = 'seleccionar(" + total +"1"+")'>p" + total + ": " + checkedValue.toString() + "</div>";
+                                    $("#predicados").append(v);
+                                    
+                             
                             }
                             
-                            function seleccionar(relacion, i) {
-                                var id = relacion + "" + i;
-                                alert(id);
-                                if (predicados_1 === id) {
-                                    if (predicados_1 === id) {
+                            
+                            function seleccionar(total) {                                
+                                var valor = document.getElementById(total).getAttribute("value");                             
+                                
+                                if (predicados_1 === valor) {
+                                    if (predicados_1 === valor) {
                                         predicados_1 = "";
                                     } 
-                                    document.getElementById(id).style.backgroundColor = "#FFFFFF";
+                                    document.getElementById(total).style.backgroundColor = "#FFFFFF";
                                 } else {
                                     if (predicados_1 === "") {
-                                        predicados_1 = id;
+                                        predicados_1 = valor;
                                     }
-                                    document.getElementById(id).style.backgroundColor = "#A9BCF5";
+                                    document.getElementById(total).style.backgroundColor = "#007BFF";
                                 }
 
-                            }
-                            
+                            }                
                          
 
                             
                             function enviar(){
                                 var sitio = document.getElementById("sitio").value;
-                                alert("sitio: "+sitio+"  id: "+minitermino_m);
-                                var minitermino = buscarMinitermino(minitermino_m);
-                                alert("relacion=" + minitermino.relacion + "&atributo_1=" + minitermino.atributo_1 + "&operador_1=" + minitermino.operador_1 + "&valor_1=" + minitermino.valor_1 + "&atributo_2=" + minitermino.atributo_2 + "&operador_2=" + minitermino.operador_2 + "&valor_2=" + minitermino.valor_2+"&sitio="+sitio);
-                                $.post("Fragmentacion?op=3&relacion=" + minitermino.relacion + "&atributo_1=" + minitermino.atributo_1 + "&operador_1=" + minitermino.operador_1 + "&valor_1=" + minitermino.valor_1 + "&atributo_2=" + minitermino.atributo_2 + "&operador_2=" + minitermino.operador_2 + "&valor_2=" + minitermino.valor_2+"&sitio="+sitio, function (data, status) {
+                                alert(predicados_1);
+                                $.post("Fragmentacion?op=4&predicado=" + predicados_1 +"&sitio="+sitio, function (data, status) {
                                     alert("respuesta del servidor: " + data);
                                     if (data === "1") {
                                         alert("Se envio correctamente al sitio 1");
+                                        predicados_1="";
                                     }
                                 });
                             }
@@ -290,9 +290,6 @@
                                     Fragmentos miniterminos
                                 </div>                            
                                 <div class="card-body">
-                                    <!--<textarea class="form-control margen" rows="3" id="ps"></textarea>-->
-                                    <div class="border border-secondary rounded" id="fragmentos" style="width: 400px; height: 125px; overflow: auto;">
-                                    </div>
                                     <br><div class="row">
                                         <div class="col-md-2">
                                             <p>Sitio</p>
