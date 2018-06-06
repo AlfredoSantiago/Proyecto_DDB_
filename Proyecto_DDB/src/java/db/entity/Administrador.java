@@ -11,6 +11,14 @@ public class Administrador {
         this.Codigo = Codigo;
         this.idUsuario = idUsuario;
     }
+    public Administrador(int idAdministrador) {
+        this.idAdministrador = idAdministrador;
+    }
+    public Administrador(int idAdministrador, String Codigo) {
+        this.idAdministrador = idAdministrador;
+        this.Codigo = Codigo;
+    }
+    
     
     public Administrador(){
         this(0,null,0);

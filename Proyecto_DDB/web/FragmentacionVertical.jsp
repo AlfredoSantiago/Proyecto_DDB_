@@ -51,14 +51,14 @@
                                     <div class="form-group">
                                         <label for="sel1">Select list:</label>
                                         <select class="form-control" id="sell" name="relacion" onchange="generarTabla()">
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Artista</option>
-                                            <option value="3">Cancion</option>
-                                            <option value="4">Cancion_Artista</option>
-                                            <option value="5">Datos Pago </option>
-                                            <option value="6">Lista de Reproducción</option>
-                                            <option value="7">Usuarios </option>
-                                            <option value="8">Cancion_Lista </option>
+                                            <option value="administrador">Administrador</option>
+                                            <option value="artista">Artista</option>
+                                            <option value="cancion">Cancion</option>
+                                            <option value="cancion_artista">Cancion_Artista</option>
+                                            <option value="datospago">datospago </option>
+                                            <option value="lista_de_reproduccion">Lista_de_Reproducción</option>
+                                            <option value="usuario">Usuarios </option>
+                                            <option value="cancion_lista">Cancion_Lista </option>
                                         </select>
                                     </div>
                                     <div id="ctabla" class="card">
@@ -73,7 +73,7 @@
                                 var x = document.getElementById("sell").value;
                                 switch (x) {
 
-                                    case "1":
+                                    case "administrador":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th> <th>Atributo 3</th> </tr>";
                                         table = table + "<tr> <td>idAdministrador</td> <td>Codigo</td> <td>idUsuario</td> </tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
@@ -86,18 +86,18 @@
                                         document.getElementById("attrs").innerHTML = cont;
                                         
                                         break;
-                                    case "2":
+                                    case "artista":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th> <th>Atributo 3</th> </tr>";
                                         table = table + "<tr> <td>idArtista</td> <td>Descripción</td> <td>idUsuario</td> </tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
                                         cont = "<div class='form-check'>"+
                                                 "    <input type='checkbox'  class='attr' value='idArtista'>idArtista <br>"+
-                                                "    <input type='checkbox'   class='attr' value='Descripción'>Descripción <br>"+
+                                                "    <input type='checkbox'   class='attr' value='Descripcion'>Descripcion <br>"+
                                                 "    <input type='checkbox'   class='attr' value='idUsuario'>idUsuario <br>"+
                                                 "</div> ";  
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
-                                    case "3":
+                                    case "cancion":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th> <th>Atributo 3</th> <th>Atributo 4</th> <th>Atributo 5</th> <th>Atributo 6</th></tr>";
                                         table = table + "<tr> <td>idCancion</td> <td>Nombre</td> <td>Album</td> <td>Genero</td> <td>No_reproducciones</td> <td>Año</td></tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
@@ -111,7 +111,7 @@
                                                 "</div> "; 
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
-                                    case "4":
+                                    case "cancion_artista":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th> </tr>";
                                         table = table + "<tr> <td>idArtista</td> <td>IdCancion</td> </tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
@@ -121,50 +121,51 @@
                                                 "</div> ";  
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
-                                    case "5":
+                                    case "datospago":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th> <th>Atributo 3</th> <th>Atributo 4</th> <th>Atributo 5</th> <th>Atributo 6</th><th>Atributo 7</th></tr>";
                                         table = table + "<tr> <td>idDatos</td> <td>Nombre</td> <td>Ap_Paterno</td> <td>Ap_Materno</td> <td>no_tarjeta</td> <td>FechaVenc</td> <td>idUsuario</td></tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
                                         cont = "<div class='form-check'>"+
                                                 "    <input type='checkbox' id='attr' class='attr' value='idDatos'>idDatos <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='Nombre'>Nombre <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Ap_Paterno'>Ap_Paterno <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Ap_Materno'>Ap_Materno <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='no_tarjeta'>no_tarjeta <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='Apellido_p'>Apellido_p <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='Apellido_m'>Apellido_m <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='noTarjeta'>noTarjeta <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='FechaVenc'>FechaVenc <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='idUsuario'>idUsuario <br>"+
                                                 "</div> ";   
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
-                                    case "6":
+                                        
+                                    case "lista_de_reproduccion":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th> <th>Atributo 3</th> </tr>";
                                         table = table + "<tr> <td>idLista</td> <td>Nombre</td> <td>idUsuario</td> </tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
                                         cont = "<div class='form-check'>"+
-                                                "    <input type='checkbox' id='attr' class='attr' value='idAdministrador'>idAdministrador <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Codigo'>Codigo <br>"+
+                                                "    <input type='checkbox' id='attr' class='attr' value='idLista'>idLista <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='Nombre'>Nombre <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='idUsuario'>idUsuario <br>"+
                                                 "</div> ";  
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
-                                    case "7":
+                                    case "usuario":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th> <th>Atributo 3</th> <th>Atributo 4</th> <th>Atributo 5</th> <th>Atributo 6</th><th>Atributo 7</th><th>Atributo 8</th></tr>";
                                         table = table + "<tr> <td>idUsuario</td> <td>Nombre</td> <td>Ap_Paterno</td> <td>Ap_Materno</td> <td>Usuario</td> <td>Contraseña</td> <td>Tipo</td><td>E-mail</td></tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
                                         cont = "<div class='form-check'>"+
                                                 "    <input type='checkbox' id='attr' class='attr' value='idUsuario'>idUsuario <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='Nombre'>Nombre <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Ap_Paterno'>Ap_Paterno <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Ap_Materno'>Ap_Materno <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='Apellido_p'>Apellido_p <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='Apellido_m'>Apellido_m <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='Usuario'>Usuario <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Contraseña'>Contraseña <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='Contrasenia'>Contrasenia <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='Tipo'>Tipo <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Codigo'>E-mail  <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='email'>email  <br>"+
                                                 "</div> "; 
                                         
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
-                                    case "8":
+                                    case "cancion_lista":
                                         table = "<table class='table table-bordered'  id = 'table'> <tr> <th>Atributo 1</th> <th>Atributo 2</th></tr>";
                                         table = table + "<tr> <td>idLista</td> <td>idCancion</td> </tr>  </table>";
                                         document.getElementById("ctabla").innerHTML = table;
@@ -234,7 +235,7 @@
                             function agregar() {                                          
                              var checkedValue; 
                                 var inputElements = document.getElementsByClassName('attr');
-                                var relacion = document.getElementById("sell").value;
+                                
                                 for(var i=0; inputElements[i]; ++i){
                                       if(inputElements[i].checked=== true){
                                           if(i===0){
@@ -274,8 +275,9 @@
                             
                             function enviar(){
                                 var sitio = document.getElementById("sitio").value;
-                                alert(predicados_1);
-                                $.post("Fragmentacion?op=4&predicado=" + predicados_1 +"&sitio="+sitio, function (data, status) {
+                                var relacion = document.getElementById("sell").value;
+                                alert(relacion);
+                                $.post("Fragmentacion?op=4&predicado=" + predicados_1 +"&sitio="+sitio+"&relacion="+relacion, function (data, status) {
                                     alert("respuesta del servidor: " + data);
                                     if (data === "1") {
                                         alert("Se envio correctamente al sitio 1");
