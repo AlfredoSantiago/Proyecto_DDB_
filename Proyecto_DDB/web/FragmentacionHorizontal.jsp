@@ -530,6 +530,7 @@
                                 var sitio = document.getElementById("sitio").value;
                                 alert("sitio: "+sitio+"  id: "+minitermino_m);
                                 var minitermino = buscarMinitermino(minitermino_m);
+                                alert(minitermino.relacion);
                                 alert("relacion=" + minitermino.relacion + "&atributo_1=" + minitermino.atributo_1 + "&operador_1=" + minitermino.operador_1 + "&valor_1=" + minitermino.valor_1 + "&atributo_2=" + minitermino.atributo_2 + "&operador_2=" + minitermino.operador_2 + "&valor_2=" + minitermino.valor_2+"&sitio="+sitio);
                                 $.post("Fragmentacion?op=3&relacion=" + minitermino.relacion + "&atributo_1=" + minitermino.atributo_1 + "&operador_1=" + minitermino.operador_1 + "&valor_1=" + minitermino.valor_1 + "&atributo_2=" + minitermino.atributo_2 + "&operador_2=" + minitermino.operador_2 + "&valor_2=" + minitermino.valor_2+"&sitio="+sitio, function (data, status) {
                                     alert("respuesta del servidor: " + data);

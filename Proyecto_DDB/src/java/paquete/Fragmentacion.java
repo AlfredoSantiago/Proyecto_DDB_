@@ -285,7 +285,14 @@ public class Fragmentacion extends HttpServlet {
 
     }
     public void guardarPredicadosMiniterminos2(String atributo_1, String sitio_n2, String nombreBase2, String contrasenia2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        
+            AdministradorDAO adao = new AdministradorDAO();
+        ArtistaDAO ardao = new ArtistaDAO();
+        CancionArtistaDAO cadao = new CancionArtistaDAO();
+        CancionDAO cdao = new CancionDAO();
+        CancionListaDAO cldao = new CancionListaDAO();
+        DatosPagoDAO dpdao = new DatosPagoDAO();
+        ListaReproduccionDAO lrdao = new ListaReproduccionDAO();
+        UsuarioDAO udao = new UsuarioDAO();
         
         
 
