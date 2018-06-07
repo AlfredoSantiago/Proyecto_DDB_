@@ -207,24 +207,18 @@ public class AdministradorDAO {
 
         rS = pS.executeQuery();
         conector.getConect().commit();
-
+        
+         System.out.println("aqui"+rS);
+        
         List<Administrador> lista = new ArrayList<>();
+        
+        
         if(atributos[0].equals("idAdministrador")){
             while (rS.next()) {
                 lista.add(new Administrador(rS.getInt(1)));
             }
             return lista;
-        }else if(atributos[0].equals("idAdministrador") && atributos[1].equals("Codigo")){
-            while (rS.next()) {
-                lista.add(new Administrador(rS.getInt(1), rS.getString(2)));
-            }
-            return lista;
-        }else if(atributos[0].equals("idAdministrador") && atributos[1].equals("Codigo") && atributos[2].equals("idUsuario") ){
-            while (rS.next()) {
-                lista.add(new Administrador(rS.getInt(1), rS.getString(2), rS.getInt(3)));
-            }
-            return lista;
-        }else 
+        }
         
         
         

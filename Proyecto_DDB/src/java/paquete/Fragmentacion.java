@@ -295,287 +295,106 @@ public class Fragmentacion extends HttpServlet {
         String aux = null;
         System.out.println(atributo_1);
         String atributos[]=atributo_1.split(",");
-        System.out.println("length:"+ atributos.length);
+        System.out.println("length:"+ atributos.length);  
+    
         
-        AdministradorDAO adao = new AdministradorDAO();
-        ArtistaDAO ardao = new ArtistaDAO();
-        CancionArtistaDAO cadao = new CancionArtistaDAO();
-        CancionDAO cdao = new CancionDAO();
-        CancionListaDAO cldao = new CancionListaDAO();
-        DatosPagoDAO dpdao = new DatosPagoDAO();
-        ListaReproduccionDAO lrdao = new ListaReproduccionDAO();
-        UsuarioDAO udao = new UsuarioDAO();
+         
         
-        /* List<Administrador> admins = adao.getVertical(atributo_1,relacion2);
-        System.out.println("obenidos correctamente");*/
-        switch (atributos[0]) {
-            case "idAdministrador":
-                switch (atributos.length) {
-                    case 1:
-                        aux = atributos[0]+" INTEGER not NULL";
-                        break;
-                    case 2:
-                        if(atributos[1].equals("Codigo")){
-                            aux = atributos[0]+" INTEGER not NULL, "+atributos[1]+" VARCHAR(10)";
-                        }else{
-                            aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" INTEGER";
-                        }
-                        break;
-                    case 3:
-                        aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(10),"+atributos[2]+" INTEGER";
-                        break;
-                    
-                }
-                break;
-            case "idArtista":
-                switch (atributos.length) {
-                    case 1:
-                         aux = atributos[0]+" INTEGER not NULL";
-                        break;
-                    case 2:
-                        if(atributos[1].equals("Descripcion")){
-                            aux = atributos[0]+" INTEGER not NULL, "+atributos[1]+" VARCHAR(1000)";
-                        }else{
-                            aux = atributos[0]+" INTEGER not NULL, "+atributos[1]+" INTEGER";
-                        }
-                            
-                        break;
-                    case 3:
-                        aux = atributos[0]+" INTEGER not NULL, "+atributos[1]+" VARCHAR(1000)"+atributos[1]+" INTEGER";
-                        break;
-                }
-                break;
-            case "idCancion":
-                switch (atributos.length) {
-                    case 1:
-                         aux = atributos[0]+" INTEGER not NULL";
-                        break;
-                    case 2:
-                        switch (atributos[1]) {
-                            case "Nombre":
-                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100)";
-                                break;
-                            case "Album":
-                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100)";
-                                break;
-                            case "Genero":
-                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100)";
-                                break;
-                            case "No_reproducciones":
-                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" INTEGER)";
-                                break;
-                            case "Año":
-                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" INTEGER)";
-                                break;
-                           
-                        }
-                        break;
-                    case 3:
-                        switch (atributos[1]) {
-                            case "Nombre":
-                                switch (atributos[2]) {
-                                    case "Album":
-                                        aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100)";
-                                        break;
-                                    case "Genero":
-                                        aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100)";
-                                        break;
-                                    case "No_reproducciones":
-                                        aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" INTEGER";
-                                        break;
-                                    case "Año":
-                                        aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" INTEGER";
-                                        break;                                    
-                                }
-                                break;
-                        }
-                        break;
-                    case 4:
-                        switch (atributos[1]) {
-                            case "Nombre":
-                                switch (atributos[2]) {
-                                    case "Album":
-                                        switch (atributos[3]) {
-                                            case "Genero":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100)";
-                                                break;
-                                            case "No_reproducciones":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER";
-                                                break;
-                                            case "Año":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER";
-                                                break;
-                                        }
-                                        break;
-                                    case "Genero":
-                                        switch (atributos[3]) {
-                                            case "Album":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100)";
-                                                break;
-                                            case "No_reproducciones":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER";
-                                                break;
-                                            case "Año":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER";
-                                                break;
-                                        }
-                                        break;
-                                    case "No_reproducciones":
-                                        switch (atributos[3]) {
-                                            case "Album":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100)";
-                                                break;
-                                            case "Genero":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100)";
-                                                break;
-                                            case "Año":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER";
-                                                break;
-                                        }
-                                        break;
-                                    case "Año":
-                                        switch (atributos[3]) {
-                                            case "Album":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100)";
-                                                break;
-                                            case "Genero":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100)";
-                                                break;
-                                            case "No_reproducciones ":
-                                                aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER";
-                                                break;
-                                        }
-                                        
-                                        break;                                    
-                                }
-                                break;
-                        }
-                        break;
-                    case 5:
-                        switch (atributos[1]) {
-                            case "Nombre":
-                                switch (atributos[2]) {
-                                    case "Album":
-                                        switch (atributos[3]) {
-                                            case "Genero":
-                                                if(atributos[4].equals("No_reproducciones")){
-                                                    aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                }else{
-                                                    aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                }                                                
-                                                break;
-                                            case "No_reproducciones":
-                                                if(atributos[4].equals("Genero")){
-                                                   aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                }else{
-                                                    aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                }
-                                                break;
-                                            case "Año":
-                                                if(atributos[4].equals("Genero")){
-                                                    aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                }else{
-                                                    aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                }                                                
-                                                break;
-                                        }
-                                        break;
-                                    case "Genero":
-                                        switch (atributos[3]) {
-                                            case "Album":
-                                                 if(atributos[4].equals("No_reproducciones")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                            case "No_reproducciones":
-                                                if(atributos[4].equals("Album ")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                            case "Año":
-                                                if(atributos[4].equals("Album ")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER,"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                        }
-                                        break;
-                                    case "No_reproducciones":
-                                        switch (atributos[3]) {
-                                            case "Album":
-                                                if(atributos[4].equals("No_reproducciones")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                            case "Genero":
-                                                if(atributos[4].equals("Album")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                            case "Año":
-                                                if(atributos[4].equals("Album")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER,"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                        }
-                                        break;
-                                    case "Año":
-                                        switch (atributos[3]) {
-                                            case "Album":
-                                                if(atributos[4].equals("Genero")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER,"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                            case "Genero":
-                                                if(atributos[4].equals("Album ")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" VARCHAR(100),"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER,"+atributos[4]+" INTEGER";
-                                                 }
-                                                
-                                                break;
-                                            case "No_reproducciones ":
-                                                if(atributos[4].equals("Album ")){
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER,"+atributos[4]+" INTEGER";
-                                                 }else{
-                                                     aux = atributos[0]+" INTEGER not NULL,"+atributos[1]+" VARCHAR(100),"+atributos[2]+" VARCHAR(100),"+atributos[3]+" INTEGER,"+atributos[4]+" INTEGER";
-                                                 }
-                                                break;
-                                        }
-                                        
-                                        break;                                    
-                                }
-                                break;
-                        }
-                        break;
-                    case 6:
-                        break;
-                }
-                break;
-            case "idDatos":
-                break;
-            case "idLista":
-                break;
-            case "idUsuario":
-                break;
-            default:
-                break;
-        }
        
-
+        for (int i = 0; i <atributos.length; i++) {
+            switch (atributos[i]) {
+                case "idAdministrador":
+                    if(i==0){
+                        aux=atributos[i]+" INTEGER NOT NULL";
+                    }else{
+                    aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    }
+                    break;
+                case "Codigo":
+                    aux+=","+atributos[i]+" VARCHAR(10)";
+                    break;
+                case "idUsuario":
+                    if(i==0){
+                        aux=atributos[i]+" INTEGER NOT NULL";
+                     }else{
+                        aux+=","+atributos[i]+" INTEGER";
+                    }
+                    break;
+                case "idArtista":
+                    if(i==0){
+                        aux=atributos[i]+" INTEGER NOT NULL";
+                    }else{
+                        aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    }
+                    break;
+                case "Descripcion":
+                    aux+=","+atributos[i]+" VARCHAR(1000)";
+                    break;
+                case "idCancion":
+                    if(i==0){
+                        aux=atributos[i]+" INTEGER NOT NULL";
+                    }else{
+                        aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    }
+                    break;
+                case "Nombre":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;
+                case "Album":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;
+                case "Genero":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;
+                case "No_reproducciones":
+                    aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    break;
+                case "Anio":
+                    aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    break;
+                case "idDatos":
+                    if(i==0){
+                        aux=atributos[i]+" INTEGER NOT NULL";
+                    }else{
+                        aux+=","+atributos[i]+" INTEGER ";
+                    }
+                    break;
+                case "Apellido_p":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;
+                case "Apellido_m":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;                
+                case "noTarjeta":
+                    aux+=","+atributos[i]+"  VARCHAR (16) ";
+                    break;                
+                case "FechaVenc":
+                     aux+=","+atributos[i]+" DATE ";
+                    break;                
+                case "idLista":
+                    if(i==0){
+                        aux=atributos[i]+" INTEGER NOT NULL";
+                    }else{
+                        aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    }
+                    break;                
+                case "Usuario":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;                
+                case "Contrasenia":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;               
+                case "Tipo":
+                    aux+=","+atributos[i]+" INTEGER ";
+                    break;                
+                case "email":
+                    aux+=","+atributos[i]+"  VARCHAR (100) ";
+                    break;          
+                default:                    
+                   break;
+            }
+            
+        }
         System.out.println(aux);
         
        
@@ -595,6 +414,16 @@ public class Fragmentacion extends HttpServlet {
             
             System.out.println("Created table in given database...");
             
+            
+            
+            String sq12 = " INSERT INTO "+Realacion1+"("+atributo_1+")" +
+                           " select " +atributo_1+
+                           " from "+relacion2+";";
+            System.out.println(sq12);
+            stmt.executeUpdate(sq12);
+            
+            
+            
                             
                                     
                             
@@ -602,6 +431,7 @@ public class Fragmentacion extends HttpServlet {
         }catch(SQLException e){
             e.printStackTrace();
         }
+
         
             
     }

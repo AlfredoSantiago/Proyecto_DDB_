@@ -107,7 +107,7 @@
                                                 "    <input type='checkbox' id='attr'  class='attr' value='Album'>Album <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='Genero'>Genero <br>"+
                                                 "    <input type='checkbox' id='attr'  class='attr' value='No_reproducciones'>No_reproducciones <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='Año'>Año <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='Anio'>Año <br>"+
                                                 "</div> "; 
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
@@ -117,7 +117,7 @@
                                         document.getElementById("ctabla").innerHTML = table;
                                         cont ="<div class='form-check'>"+
                                                 "    <input type='checkbox' id='attr' class='attr' value='idArtista'>idArtista <br>"+
-                                                "    <input type='checkbox' id='attr'  class='attr' value='IdCancion'>IdCancion <br>"+
+                                                "    <input type='checkbox' id='attr'  class='attr' value='idCancion'>IdCancion <br>"+
                                                 "</div> ";  
                                         document.getElementById("attrs").innerHTML = cont;
                                         break;
@@ -276,9 +276,9 @@
                             function enviar(){
                                 var sitio = document.getElementById("sitio").value;
                                 var relacion = document.getElementById("sell").value;
-                                alert(relacion);
+                                //alert(relacion);
                                 $.post("Fragmentacion?op=4&predicado=" + predicados_1 +"&sitio="+sitio+"&relacion="+relacion, function (data, status) {
-                                    alert("respuesta del servidor: " + data);
+                                   // alert("respuesta del servidor: " + data);
                                     if (data === "1") {
                                         alert("Se envio correctamente al sitio 1");
                                         predicados_1="";
