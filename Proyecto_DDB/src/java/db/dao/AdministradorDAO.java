@@ -192,37 +192,6 @@ public class AdministradorDAO {
         conector.getConect().commit();
         conector.cerrarConexion();
     }   
-     public List<Administrador> getVertical(String atributo_1,String relacion2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Conexion conector = new Conexion();
-         System.out.println("estoy aqui y estamos haciendo select "+atributo_1+" from "+relacion2);
-        String query = "SELECT "+atributo_1+" FROM "+relacion2;
-        PreparedStatement pS;
-        ResultSet rS;
-        String atributos[]=atributo_1.split(",");
-        conector.setBd("proyecto_DDB");
-        conector.abrirConexion();
-
-        pS = conector.getConect().prepareStatement(query);
-        conector.getConect().setAutoCommit(false);
-
-        rS = pS.executeQuery();
-        conector.getConect().commit();
-        
-         System.out.println("aqui"+rS);
-        
-        List<Administrador> lista = new ArrayList<>();
-        
-        
-        if(atributos[0].equals("idAdministrador")){
-            while (rS.next()) {
-                lista.add(new Administrador(rS.getInt(1)));
-            }
-            return lista;
-        }
-        
-        
-        
-        return null;
-    }
+ 
     
 }

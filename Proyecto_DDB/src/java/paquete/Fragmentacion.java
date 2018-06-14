@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -83,9 +84,9 @@ public class Fragmentacion extends HttpServlet {
                         contrasenia = "root";
                         break;
                     case 2:
-                        sitio = "jdbc:mysql://10.100.76.213/";
-                        nombreBase = "proyDB";
-                        contrasenia = "raizserver@Mario";
+                        sitio = "jdbc:mysql://192.168.1.70/prueba";
+                        nombreBase = "prueba";
+                        contrasenia = "root";
                         break;
                     case 3:
                         sitio = "jdbc:mysql://10.100.74.82/";
@@ -112,7 +113,7 @@ public class Fragmentacion extends HttpServlet {
                 System.out.println("Caso 4 predicado: "+atributo_1);
                 switch(sitio_n2){
                     case 1:
-                        sitio2 = "jdbc:mysql://localhost/proyecto_ddb";
+                        sitio2 = "jdbc:mysql://localhost/proyecto_ddb1";
                         nombreBase2 = "proyecto_ddb_1";
                         contrasenia2 = "root";
                         break;
@@ -288,8 +289,10 @@ public class Fragmentacion extends HttpServlet {
 
     }
     public void guardarPredicadosMiniterminos2(String atributo_1,String relacion2, String sitio_n2, String nombreBase2, String contrasenia2) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String Realacion1 = relacion2+"11";
+        String Realacion1 = relacion2;
         System.out.println(atributo_1+","+Realacion1+","+sitio_n2+","+nombreBase2+","+contrasenia2);
+        Connection conn1 = null;       
+        Statement stmt1 = null;
         Connection conn = null;       
         Statement stmt = null;
         String aux = null;
@@ -347,10 +350,10 @@ public class Fragmentacion extends HttpServlet {
                     aux+=","+atributos[i]+"  VARCHAR (100) ";
                     break;
                 case "No_reproducciones":
-                    aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    aux+=","+atributos[i]+" INTEGER ";
                     break;
                 case "Anio":
-                    aux+=","+atributos[i]+" INTEGER NOT NULL";
+                    aux+=","+atributos[i]+" INTEGER ";
                     break;
                 case "idDatos":
                     if(i==0){
@@ -403,26 +406,71 @@ public class Fragmentacion extends HttpServlet {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(sitio_n2, "root", contrasenia2);            
+            
+             System.out.println("Connecting to a database local...");
+            conn1 = DriverManager.getConnection("jdbc:mysql://localhost/proyecto_ddb", "root", "root");  
             System.out.println("Connected database successfully...");
+            
+            stmt1 = conn1.createStatement(); 
+            
+            System.out.println("Connecting to a selected database...");
+            conn = DriverManager.getConnection(sitio_n2, "root", contrasenia2);  
+            System.out.println("Connected database successfully...");
+            
             stmt = conn.createStatement();
             
-            String sql ="CREATE TABLE "+Realacion1+""+
+             String sql ="CREATE TABLE "+Realacion1+""+
                         "("+aux+");";
             stmt.executeUpdate(sql);
             
-            System.out.println("Created table in given database...");
+             System.out.println("Created table in given database...");
             
             
             
-            String sq12 = " INSERT INTO "+Realacion1+"("+atributo_1+")" +
-                           " select " +atributo_1+
-                           " from "+relacion2+";";
-            System.out.println(sq12);
-            stmt.executeUpdate(sq12);
+
+            String select  = "Select "+atributo_1+ 
+                           " from "+relacion2+";"; 
+            ResultSet rs;
+             	
+            List<String> ejemploLista = new ArrayList<String>();
+             int k = 0;
+            for (int i = 0; i < atributos.length; i++) {
+                System.out.println("--------------");
+                k=0;
+                rs = stmt1.executeQuery(select);  
+                while ( rs.next() ) {
+                    
+                    String lastName = rs.getString(atributos[i]);
+                    if(i==0){
+                        ejemploLista.add(lastName);
+                        String insert = "insert into "+relacion2+"("+atributos[i]+")"+
+                                        "values ("+lastName+");";
+                           stmt.executeUpdate(insert);
+                    }else{
+                       String update = "update "+relacion2;
+                        if(atributos[i].equals("idUsuario") || atributos[i].equals("No_reproducciones") || atributos[i].equals("Anio") || atributos[i].equals("IdCancion") || atributos[i].equals("Tipo") || atributos[i].equals("idCancion")){
+                             update +=" set "+atributos[i]+"="+lastName;
+                        }else{
+                             update +=" set "+atributos[i]+"="+"\""+lastName+"\"";
+                        }
+                         update += " where "+atributos[0]+"="+ejemploLista.get(k)+";";     
+                            
+                                     
+                                                
+                             
+                       // System.out.println(update);
+                       stmt.executeUpdate(update);
+                    }
+                    k++;
+                }
+                
+            }
             
+                    
             
+           
+            
+  
             
                             
                                     
